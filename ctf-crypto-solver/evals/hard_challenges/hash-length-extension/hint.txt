@@ -1,0 +1,5 @@
+A verifier is running at 127.0.0.1:40125. It authenticates
+message = user=guest&role=user with md5(secret || message), where the
+secret is 16 bytes. Make it accept a message containing admin=1, then
+it prints the flag. If the service is not running, start it with
+  CTF_SECRET=<16 bytes> CTF_FLAG='<the real flag>' python server.py 40125

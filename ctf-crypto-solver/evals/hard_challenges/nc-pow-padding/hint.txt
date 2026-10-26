@@ -1,0 +1,4 @@
+A CBC padding oracle is running at 127.0.0.1:40124, behind a
+proof of work: sha256(prefix + answer) must start with 3 hex zeros.
+After solving it, the server prints IV and CT and answers valid/invalid
+for hex(IV||CT). Recover the flag (flag{...}).

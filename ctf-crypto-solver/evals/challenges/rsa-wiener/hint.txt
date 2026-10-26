@@ -1,0 +1,2 @@
+A textbook RSA implementation reused a poorly chosen private exponent.
+The public exponent is unusually large. Recover the flag (flag{...}).

@@ -1,0 +1,83 @@
+{
+  "skill_name": "ctf-crypto-solver",
+  "evals": [
+    {
+      "id": 0,
+      "name": "classical-vigenere",
+      "prompt": "I'm stuck on this CTF crypto challenge. The files are in <challenge_dir> (ciphertext.txt and hint.txt). The hint says it's a repeating-key cipher with a key of at most 8 letters. Recover the flag and write a solve script I can rerun.",
+      "expected_output": "flag{vigenere_is_not_secure}",
+      "files": ["ciphertext.txt", "hint.txt"],
+      "expectations": [
+        "flag.txt exists and contains exactly flag{vigenere_is_not_secure}",
+        "solve.py exists and is non-empty",
+        "solve.py does not contain the expected flag literal (the flag is derived, not hardcoded)",
+        "solve.py or notes.md mentions Vigenere or recovering a repeating key"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "rsa-wiener",
+      "prompt": "CTF crypto challenge. The files are in <challenge_dir> (output.txt has n, e, c; hint.txt has context). The public exponent looks huge. Recover the flag and write a solve script.",
+      "expected_output": "flag{wiener_says_your_d_is_too_small}",
+      "files": ["output.txt", "hint.txt"],
+      "expectations": [
+        "flag.txt exists and contains exactly flag{wiener_says_your_d_is_too_small}",
+        "solve.py exists and is non-empty",
+        "solve.py does not contain the expected flag literal (the flag is derived, not hardcoded)",
+        "solve.py or notes.md mentions Wiener's attack or continued fractions"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "rsa-partial-p",
+      "prompt": "CTF crypto challenge in <challenge_dir>. output.txt has n, e, c, p_high and unknown_low_bits. The hint says the low bits of p were wiped. Recover the flag and write a solve script.",
+      "expected_output": "flag{coppersmith_finds_small_roots}",
+      "files": ["output.txt", "hint.txt"],
+      "expectations": [
+        "flag.txt exists and contains exactly flag{coppersmith_finds_small_roots}",
+        "solve.py exists and is non-empty",
+        "solve.py does not contain the expected flag literal (the flag is derived, not hardcoded)",
+        "solve.py or notes.md mentions Coppersmith, small roots, or lattice reduction"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "prng-lcg",
+      "prompt": "CTF crypto challenge in <challenge_dir>. outputs.txt has 12 consecutive LCG outputs and ciphertext.hex is a message XORed with the next outputs. The LCG parameters are unknown. Recover the flag and write a solve script.",
+      "expected_output": "flag{linear_congruential_generators_are_predictable}",
+      "files": ["outputs.txt", "ciphertext.hex", "hint.txt"],
+      "expectations": [
+        "flag.txt exists and contains exactly flag{linear_congruential_generators_are_predictable}",
+        "solve.py exists and is non-empty",
+        "solve.py does not contain the expected flag literal (the flag is derived, not hardcoded)",
+        "solve.py or notes.md mentions LCG, linear congruential, or predicting the next outputs"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "ecc-ecdsa",
+      "prompt": "CTF crypto challenge in <challenge_dir>. output.txt has secp256k1 parameters, two ECDSA signatures, and an AES-CBC ciphertext; hint.txt explains the key derivation. Recover the flag and write a solve script.",
+      "expected_output": "flag{ecdsa_nonce_reuse_breaks_the_key}",
+      "files": ["output.txt", "hint.txt"],
+      "expectations": [
+        "flag.txt exists and contains exactly flag{ecdsa_nonce_reuse_breaks_the_key}",
+        "solve.py exists and is non-empty",
+        "solve.py does not contain the expected flag literal (the flag is derived, not hardcoded)",
+        "solve.py or notes.md mentions ECDSA nonce reuse or recovering the private key"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "aes-padding-oracle",
+      "prompt": "CTF crypto challenge in <challenge_dir>. A padding-oracle service is running at 127.0.0.1:40123; it prints IV and CT on connect and answers valid/invalid for hex(IV||CT). Decrypt the plaintext, recover the flag, and write a solve script.",
+      "expected_output": "flag{padding_oracles_leak_plaintext}",
+      "files": ["server.py", "hint.txt"],
+      "expectations": [
+        "flag.txt exists and contains exactly flag{padding_oracles_leak_plaintext}",
+        "solve.py exists and is non-empty",
+        "solve.py does not contain the expected flag literal (the flag is derived, not hardcoded)",
+        "solve.py or notes.md mentions a padding oracle or CBC decryption"
+      ]
+    }
+  ]
+}

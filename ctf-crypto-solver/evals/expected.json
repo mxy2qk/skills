@@ -1,0 +1,8 @@
+{
+  "classical-vigenere": "flag{vigenere_is_not_secure}",
+  "rsa-wiener": "flag{wiener_says_your_d_is_too_small}",
+  "rsa-partial-p": "flag{coppersmith_finds_small_roots}",
+  "prng-lcg": "flag{linear_congruential_generators_are_predictable}",
+  "ecc-ecdsa": "flag{ecdsa_nonce_reuse_breaks_the_key}",
+  "aes-padding-oracle": "flag{padding_oracles_leak_plaintext}"
+}

@@ -1,0 +1,3 @@
+We intercepted a message that looks like it used a repeating-key cipher.
+The key is a common English word and is at most 8 letters long.
+Recover the full plaintext and extract the flag (format: flag{...}).

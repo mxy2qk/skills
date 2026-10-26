@@ -1,0 +1,7 @@
+{
+  "ecdsa-biased-nonce": "flag{ecdsa_biased_nonce_hnp_works}",
+  "prng-mt19937": "flag{mt19937_state_recovery_works}",
+  "hash-length-extension": "flag{length_extension_still_works}",
+  "dh-smooth-order": "flag{dh_smooth_order_falls_to_pohlig_hellman}",
+  "nc-pow-padding": "flag{pow_then_padding_oracle}"
+}

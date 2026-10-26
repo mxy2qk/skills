@@ -1,0 +1,3 @@
+The server printed 12 consecutive LCG outputs before encrypting a message.
+The ciphertext is XORed with the next LCG outputs, 8 bytes per block,
+big-endian. Recover the flag (flag{...}). The LCG parameters are unknown.

@@ -1,0 +1,4 @@
+A buggy ECDSA signer on secp256k1 generated 40 signatures. Each nonce's
+top bits were leaked (k_msb), but the low 8 bits are unknown.
+Flag key = SHA256(str(private_key_as_decimal))[:32], AES-256-CBC.
+Recover the flag (flag{...}).

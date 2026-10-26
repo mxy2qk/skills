@@ -1,0 +1,3 @@
+624 consecutive 32-bit outputs are given, followed by a ciphertext.
+The ciphertext is XORed with the next 32-bit outputs, 4 bytes per block,
+big-endian. Recover the flag (flag{...}).

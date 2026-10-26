@@ -1,0 +1,5 @@
+A CBC padding oracle is running at 127.0.0.1:40123.
+It prints IV and CT on connect and answers valid/invalid for hex(IV||CT).
+If it is not running, start it with:
+  CTF_FLAG='<the real flag>' python server.py 40123
+Decrypt the plaintext and recover the flag (flag{...}).

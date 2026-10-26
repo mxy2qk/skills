@@ -1,0 +1,3 @@
+A Diffie-Hellman exchange used a weak prime. The flag key is
+SHA256(str(shared_secret))[:32], AES-256-CBC.
+Recover the flag (flag{...}).

@@ -1,0 +1,4 @@
+Two ECDSA signatures were produced by a buggy signer on secp256k1.
+The flag was encrypted with AES-256-CBC using
+key = SHA256(str(private_key_as_decimal))[:32], with the IV below.
+Recover the flag (flag{...}).
