@@ -1,6 +1,6 @@
 # skills
 
-funny skill
+funny skills
 
 ## ctf-crypto-solver
 
