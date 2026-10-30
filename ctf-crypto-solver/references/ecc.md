@@ -72,7 +72,8 @@ E = EllipticCurve(GF(p), [a, b])
 ```
 
 If Sage is unavailable, say so rather than attempting an unreliable
-implementation.
+implementation. Runnable template: `scripts/templates/smart_anomalous.sage`
+(reads an `instance.json`; retries the p-adic precision automatically).
 
 ## 5. Invalid-curve attack
 
@@ -86,7 +87,9 @@ small subgroups.
 If the embedding degree `k` (smallest `k` with `n | p^k - 1`) is small, the
 DLP transfers to `F_{p^k}^*`. Useful for supersingular curves. Sage has
 `EllipticCurve.weil_pairing`; pure Python pairings are a project, not a quick
-solve.
+solve. Runnable template: `scripts/templates/mov_fr.sage` (MOV/Weil or
+Frey-Rück/Tate; it reconciles the log modulo `ord(alpha)` when `n` is
+composite).
 
 ## 7. ECDSA
 
@@ -217,6 +220,26 @@ This is an HNP instance.
 from ctfkit import lattice
 cands = lattice.ecdsa_partial_nonce_recover(q, rs, ss, hs, leaked, t)
 ```
+
+For non-ECDSA contexts (truncated LCG/LFSR, DSA, generic modular equations),
+the same reduction is `lattice.hnp_partial_bits(a, b, m, leaked, bits)`:
+`a_i*y + b_i ≡ leaked_i*2^bits + delta_i (mod m)` with small `delta_i`.
+
+### HNP variants (paper-level)
+
+- **Unknown modulus.** If `m` is unknown, solve for both `m` and `y` with a
+  multivariate/Coppersmith approach (see `coppersmith_multi.sage`); or reduce
+  modulo known divisors first. Paper: 2026/1027 (LP bounds), 2026/423.
+- **Multiple unknowns (multivariate HNP).** Several coupled `y_j` → LWE-shaped;
+  treat each equation as `a·y + b = small (mod m)` and use `lwe_hints.sage`.
+- **Modular-inversion HNP (MIHNP).** Equations involve `(a_i*y+b_i)^{-1} mod m`;
+  handled by Coppersmith over multivariate modular polynomials (2026/423).
+- **Sign / Hamming-weight leakage** (HAWK/Falcon/ML-DSA randomness): a leaked
+  bit reveals `sign(<b, w>)`; model as *Learning a Halfspace* (2026/1366), or
+  convert to approximate hints for `lwe_hints.sage`.
+- **Threshold signatures.** Fault-induced nonce reuse across sessions leaks a
+  share per device (2026/2566); two distinct challenges cancel the nonce
+  (2026/1668). Watch for reveal-structure rather than nonce uniformity.
 
 Rules of thumb:
 

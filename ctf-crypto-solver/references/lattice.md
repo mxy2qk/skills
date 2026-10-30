@@ -116,6 +116,8 @@ unknown but bounded.
 
 **Boneh-Durfee (small `d`).** A bivariate lattice for `d < N^0.292`. It needs
 a large lattice (dimension 20–50+) and careful parameter tuning; use Sage.
+Runnable template: `scripts/templates/boneh_durfee.sage` (Herrmann-May;
+auto-derives `t` from `delta`, decrypts `c` when given).
 
 ## 5. Practical tips
 
@@ -287,6 +289,16 @@ LLL on the dual, then intersect with the original lattice.
 Say so explicitly and provide the Sage code path; do not claim the pure-Python
 implementation handles those scales.
 
+Runnable templates in `scripts/templates/`:
+- `coppersmith_multi.sage` — multivariate `small_roots` (Sage 10 compatible;
+  builds the shift matrix by hand rather than using the removed
+  `Sequence.coefficient_matrix()`).
+- `lwe_bkz.sage` — LWE embedding `[[q·I,0],[Aᵀ,I]]` + Babai; LLL by default,
+  BKZ when a block size is passed.
+- `lwe_hints.sage` — LWE with extra linear hints: perfect hints are eliminated
+  (dimension reduction), approximate hints are appended as noisy rows. See
+  `references/lwe-hints.md`.
+
 Useful external implementations:
 
 - `https://github.com/jvdsn/crypto-attacks` — Coppersmith, HNP, LWE, ECDSA,
@@ -296,3 +308,31 @@ Useful external implementations:
 - `https://github.com/defund/coppersmith` — univariate/bivariate Coppersmith
   templates.
 - `fpylll` — BKZ/CVP for dimensions where the built-in LLL is too weak.
+
+## 8. Automated Coppersmith 的渐近界（线性规划）
+
+对**不是标准单变量/双变量**的多元模多项式系统，判断“能恢复到多大根”不再靠
+`X < N^(beta^2/d)` 这种闭式界，而需要 Automated Coppersmith 方法
+（Meers–Nowakowski, ASIACRYPT 2023）。**2026/1027** 把其渐近界计算转化为
+**线性规划**，得到可证明正确、显式可算的公式，覆盖五个场景：
+
+- Commutative Isogeny HNP
+- Modular Inversion HNP（MIHNP）
+- Elliptic Curve HNP（EC-HNP）
+- 未知乘子的线性同余生成器（LCG）
+- POKE 的 Leveled Isogeny Problem with Hints
+
+**用法**：遇到“多条模方程、未知都小、但不知道该用多大 m”的题：
+
+1. 先写变量个数与每条方程的单项式支撑。
+2. 用 Automated Coppersmith 的 exponent-polytope 构造（或用 2026/1027 的 LP
+   公式）求可达界。
+3. 若界 < 题目参数 → 换个思路（hint/归约）；若足够 → 用 `coppersmith_multi.sage`
+   按计算的 m/d 跑。
+
+**提示**：`coppersmith_multi.sage` 的 `small_roots(f, bounds, m, d)` 就是
+Automated Coppersmith 的具体化——m 决定格大小与可达界，d 限制 shift 次数。
+调 m 前先用界判断可行性，避免盲目放大格。
+
+相关论文：2026/423（MIHNP 的行列式消元选 shift）、2026/244（Ehrhart 拟多项式
+与 `DimOracle` 估格维数）、2026/1027（LP 界）。

@@ -354,3 +354,50 @@ def crack_truncated_lcg(
         if ok:
             return x
     return None
+
+
+# --------------------------------------------------------------------------
+# V8 `Math.random()` - XorShift128+
+# --------------------------------------------------------------------------
+
+_MASK64 = (1 << 64) - 1
+_V8_SCALE = 1.0 / (1 << 53)
+
+
+class XorShift128Plus:
+    """V8's `Math.random()` PRNG (XorShift128+)."""
+
+    def __init__(self, state0: int, state1: int):
+        self.state0 = state0 & _MASK64
+        self.state1 = state1 & _MASK64
+
+    def next64(self) -> int:
+        s1 = self.state0
+        s0 = self.state1
+        self.state0 = s0
+        s1 ^= (s1 << 23) & _MASK64
+        s1 ^= s1 >> 17
+        s1 ^= s0
+        s1 ^= s0 >> 26
+        self.state1 = s1 & _MASK64
+        return (self.state1 + s0) & _MASK64
+
+    def next_double(self) -> float:
+        return (self.next64() >> 11) * _V8_SCALE
+
+
+def v8_next64(state0: int, state1: int) -> tuple[int, int, int]:
+    """One XorShift128+ step: returns (next_state0, next_state1, output64)."""
+    s1 = state0
+    s0 = state1
+    s1 ^= (s1 << 23) & _MASK64
+    s1 ^= s1 >> 17
+    s1 ^= s0
+    s1 ^= s0 >> 26
+    s1 &= _MASK64
+    return s0, s1, (s1 + s0) & _MASK64
+
+
+def v8_double_to_int(d: float) -> int:
+    """Invert `Math.random()`: the 53-bit integer o with d == o / 2^53."""
+    return int(round(d * (1 << 53)))

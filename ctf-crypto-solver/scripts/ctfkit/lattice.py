@@ -177,6 +177,33 @@ def lwe_cvp_solve(
     return s, e
 
 
+def lwe_with_hints(
+    A: list[list[int]], b: list[int], q: int, hints: list
+) -> tuple[list[int], list[int]]:
+    """Solve LWE with extra linear hints on the secret.
+
+    Each hint is ``<v, s> = l`` (mod q), optionally with a small error
+    (``(v, l)`` or ``(v, l, err)``). The hint is appended as one more LWE
+    sample: perfect hints contribute zero error, approximate hints contribute
+    their (small) error. Then ``lwe_cvp_solve`` runs on the augmented instance.
+
+    This is the simple "append" strategy; for many perfect hints the Sage
+    template ``scripts/templates/lwe_hints.sage`` instead eliminates the hinted
+    coordinates (smaller lattice). This pure-Python helper is for small
+    instances only.
+
+    Returns ``(s, e_ext)`` where ``e_ext`` includes the hint residuals and has
+    length ``len(A) + len(hints)``.
+    """
+    ext_A = [list(row) for row in A]
+    ext_b = [x % q for x in b]
+    for h in hints:
+        v, l = h[0], h[1]
+        ext_A.append(list(v))
+        ext_b.append(l % q)
+    return lwe_cvp_solve(ext_A, ext_b, q)
+
+
 def ntru_mul(h: list[int], f: list[int], q: int, negacyclic: bool = True) -> list[int]:
     """Polynomial multiplication in Z_q[x]/(x^N +/- 1)."""
     N = len(h)
@@ -491,6 +518,28 @@ def hnp_solve(
             if cand and all((a[i] * cand + b[i]) % m < X for i in range(n)):
                 out.add(cand)
     return sorted(out)
+
+
+def hnp_partial_bits(
+    a: list[int], b: list[int], m: int, leaked: list[int], bits: int, max_dim: int = 60
+) -> list[int]:
+    """HNP with the top `bits` of each error known: the general form of
+    partial-nonce / truncated-PRNG leaks.
+
+    For each sample: a_i*y + b_i ≡ e_i (mod m) with
+        e_i = leaked_i * 2^bits + delta_i,    0 <= delta_i < 2^bits.
+    Moving the known part into the constant gives
+        a_i*y + (b_i - leaked_i*2^bits) ≡ delta_i (mod m),
+    an HNP instance with bound X = 2^bits, so this wraps hnp_solve.
+
+    Returns candidate y values.
+    """
+    n = len(a)
+    if n < 1 or len(b) != n or len(leaked) != n:
+        raise ValueError("a, b, leaked must be the same non-empty length")
+    X = 1 << bits
+    b2 = [(b[i] - leaked[i] * X) % m for i in range(n)]
+    return hnp_solve(a, b2, m, X, max_dim=max_dim)
 
 
 def ecdsa_partial_nonce_recover(

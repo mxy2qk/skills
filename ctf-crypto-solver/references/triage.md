@@ -266,3 +266,29 @@ Pivot to another category when:
 - a pcap/disk/memory image must be carved first → forensics,
 - the crypto is solved and only a network exploit remains → pwn/web,
 - the challenge is an encoding/esoteric puzzle → misc.
+
+## 5. Paper-based challenge signals (2026)
+
+If a challenge looks research-grade ("just past a classical bound"), use these
+signals to pick the direction, then open `assets/papers/paper-map.md` and
+`scripts/papers/search.py` for the specific paper + template.
+
+| Signal in the challenge | Direction | Start with |
+|---|---|---|
+| Parameters just past a classical bound (d slightly > Wiener, dp slightly > known, hint count near threshold, lattice dim 40–80) | Coppersmith / RSA variants, LWE hints | `references/rsa-crt-exponents.md`, `references/lwe-hints.md` |
+| New primitive name: ML-KEM/Kyber, ML-DSA/Dilithium, HAWK, NTRU+, SDitH, Polar-KEM, LIP, LtHash | PQC implementation / LIP | `references/pqc-faults.md`, `references/lip-hawk.md` |
+| Extra "hints": leaked bits, mod-q hints, guessable errors, fault outputs, side-channel traces | LWE-with-hints / PQC faults | `scripts/templates/lwe_hints.sage`, `ilwe_bp.sage` |
+| Ring/ideal structure (NTT domain, cyclotomic ring, ideal lattice) | structured lattice / SIS/LIP | `references/lattice.md` §8, `lip-hawk.md` |
+| Multivariate modular equations, EC-HNP, aggressive Gröbner use | Automated Coppersmith / multivariate | `references/ec-hnp.md`, `coppersmith_multi.sage` |
+| The intended solution looks like "copy a paper's algorithm" | whatever the paper is | `paper-map.md` → `papers.json` |
+
+Rules of thumb for paper-based challenges:
+
+- Check the **bound/feasibility first** (e.g. `n` pairs for EC-HNP, `δ < 0.122`
+  for small CRT exponents, hint count vs `O(h log h)`); if the parameters are
+  outside the bound, a different idea is needed, not more lattice tuning.
+- Prefer the **half-dimension / structural** formulation when the paper offers
+  one (e.g. 2026/2109 over TLP; 2026/1081 over `n/2` hints).
+- For implementation/fault challenges, the bug tells you which hint type you
+  get; map it to the hint lattice/BP tool rather than attacking the primitive
+  directly.

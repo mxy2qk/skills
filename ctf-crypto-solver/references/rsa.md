@@ -294,7 +294,9 @@ g = gcd(pow(a, e*dp, n) - a, n)   # p for random a
 
 If only high bits of `dp` are known, use Coppersmith on
 `e*dp - 1 = k*(p-1)` (bivariate; Sage is easier). A small `dp, dq`
-(`< N^0.073`) is the "small CRT exponent" lattice attack.
+(`< N^0.073`) is the "small CRT exponent" lattice attack. For partial MSB/LSB
+of both `dp` and `dq`, see `references/rsa-crt-exponents.md` and the runnable
+`scripts/templates/crt_rsa_partial.sage` (MSB path validated).
 
 ### `gcd(e, phi) > 1`
 

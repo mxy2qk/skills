@@ -250,7 +250,9 @@ Wiener, Boneh-Durfee, Fermat, Pollard rho/p-1, shared primes, `phi/d/dp/dq`
 leaks, partial `p` (Coppersmith), stereotyped message, Franklin-Reiter,
 short-pad, Rabin, multi-prime, `gcd(e, phi)>1`, LSB/parity oracle, Manger,
 Bleichenbacher, CRT fault, homomorphic decryption oracle, signature forgeries.
-See `references/rsa.md`.
+See `references/rsa.md` and `references/rsa-crt-exponents.md`; runnable
+templates `scripts/templates/boneh_durfee.sage`, `scripts/templates/crt_rsa_partial.sage`,
+`scripts/templates/crt_rsa_small_dp.sage`.
 
 ### Diffie-Hellman
 
@@ -262,7 +264,8 @@ See `references/dh.md`.
 
 Small subgroup, invalid curve, singular curve (node/cusp), Smart's attack,
 Pohlig-Hellman/BSGS, MOV/pairing, ECDSA/DSA nonce reuse, biased/partial nonce
-HNP, fault injection, Ed25519 torsion. See `references/ecc.md`.
+HNP, fault injection, Ed25519 torsion. See `references/ecc.md`; runnable
+templates `scripts/templates/smart_anomalous.sage`, `scripts/templates/mov_fr.sage`.
 
 **ECDH x-coordinate MSB oracle (EC-HNP / babyDH2 lineage).** A service leaks
 most significant bits of `x(a·P)` for points `P` you choose, and you must
@@ -278,8 +281,9 @@ case study in `references/ec-hnp.md`; runnable template
 
 ECB detection, cut-and-paste, byte-at-a-time ECB, CBC bit-flip, padding
 oracle, IV reuse, CBC-MAC forgery, CTR bit-flip/reuse, GCM nonce reuse
-(forbidden attack), CFB/OFB state recovery, compression oracle. See
-`references/symmetric.md`.
+(forbidden attack, multi-block), CFB/OFB state recovery, compression oracle.
+See `references/symmetric.md`; multi-block GCM template
+`scripts/templates/gcm_reuse.py`.
 
 ### Stream ciphers
 
@@ -290,7 +294,8 @@ attacks, RC4 biases, ChaCha20-Poly1305 nonce reuse. See `references/stream.md`.
 
 LCG parameter recovery (known/unknown modulus), truncated LCG, MT19937
 untemper/clone, float outputs, Java `Random`, V8 XorShift128+, C
-`srand/rand`, time-based seeds, logistic map. See `references/prng.md`.
+`srand/rand`, time-based seeds, logistic map. See `references/prng.md`;
+V8 recovery template `scripts/templates/v8_xorshift128plus.py` (needs z3).
 
 ### Hashes and MACs
 
@@ -302,7 +307,14 @@ linearity/forgery, HMAC pitfalls, sponge constructions. See
 
 LLL/BKZ, Coppersmith (univariate, partial `p`, stereotyped message),
 HNP/biased ECDSA nonces, truncated LCG, LWE/Ring-LWE/Module-LWE, subset
-sum/knapsack, NTRU, orthogonal lattices. See `references/lattice.md`.
+sum/knapsack, NTRU, orthogonal lattices. See `references/lattice.md` and
+`references/lwe-hints.md`; runnable templates
+`scripts/templates/coppersmith_multi.sage` (multivariate small roots),
+`scripts/templates/lwe_bkz.sage` (embedding + Babai/BKZ),
+`scripts/templates/lwe_hints.sage` (LWE with extra hints) and
+`scripts/templates/lip_check.sage` (LIP detection, toy dims). For LIP / HAWK /
+ideal lattices and dual/hybrid LWE parameter evaluation, see
+`references/lip-hawk.md` and `references/lwe-dual.md`.
 
 ### ZKP / secret sharing
 
@@ -319,7 +331,11 @@ matrix/braid/tropical DH, isogeny notes. See `references/exotic.md`.
 ### Post-quantum
 
 ML-KEM/Kyber, ML-DSA/Dilithium, Falcon, NTRU recognition; FO failure oracle;
-NTT/representation bugs; lattice flattening. See `references/post-quantum.md`.
+NTT/representation bugs; lattice flattening. See `references/post-quantum.md`
+and `references/pqc-faults.md` (side-channel/fault → key recovery flow;
+runnable `scripts/templates/ilwe_bp.sage`). Start with
+`scripts/templates/pqc_triage.py <dir>`; helpers in `ctfkit.pqc`
+(`detect`, `negacyclic_matrix`, `flatten_lwe`).
 
 ## Optional external tools
 
@@ -331,7 +347,7 @@ only when a reference says the pure-Python path is not enough:
 | `RsaCtfTool` | automated RSA attack sweep (small e, Wiener, Fermat, shared factors) |
 | `crypto-attacks` (jvdsn) | Coppersmith, bivariate/HNP, LWE, ECDSA attacks in Sage |
 | `fpylll` | BKZ / CVP for lattice dimensions where pure LLL is too weak |
-| SageMath | Smart's attack, Boneh-Durfee, pairings, bivariate Coppersmith |
+| SageMath | Smart, MOV/FR, Boneh-Durfee, bivariate Coppersmith, BKZ; read `references/sage.md` and use `scripts/templates/smart_anomalous.sage`, `mov_fr.sage`, `boneh_durfee.sage`, `coppersmith_multi.sage`, `lwe_bkz.sage`, `lwe_hints.sage` |
 | `nonce-disrespect` | multi-block AES-GCM forbidden attack |
 | `hashpumpy` | hash length extension (alternative to `ctfkit.hashx`) |
 | `z3-solver` | PRNG state recovery and constraint solving |
@@ -345,6 +361,37 @@ git clone https://github.com/RsaCtfTool/RsaCtfTool
 
 State the dependency if a solve uses one of these; do not silently assume it
 is installed.
+
+## Paper library (2026)
+
+A curated, searchable index of 2026 IACR ePrint attacks relevant to lattice,
+Sage, PQC and RSA challenges lives in `assets/papers/`:
+
+- `assets/papers/index.md` — all 91 papers, grouped by direction, one line each
+  (ID, date, title, CTF rating, challenge shape).
+- `assets/papers/paper-map.md` — challenge-signal quick table plus, per
+  direction, a "challenge shape → paper → template" table. Start here when a
+  new challenge smells paper-based.
+- `assets/papers/papers.json` — structured records with Chinese summaries,
+  tags, `ctf_relevance` (1–5) and the matching template/tool.
+- `assets/papers/<direction>.md` — six directions: `lattice-lwe-hints`,
+  `pqc-implementation`, `sis-lip-ideal`, `coppersmith-rsa`,
+  `hnp-signatures`, `ecc-pairing-isogeny`.
+
+Use it when a challenge's parameters sit just past a classical bound, when a
+new primitive name appears (ML-KEM/ML-DSA/HAWK/LIP/LtHash/Polar-KEM), or when
+the task hands you extra "hints" (leaked bits, faults, side-channel traces).
+`paper-map.md` is the quick lookup; `index.md` and the direction pages carry
+the full summaries.
+
+```bash
+"$PYTHON" scripts/papers/search.py hint --min-rating 4
+"$PYTHON" scripts/papers/search.py --direction coppersmith-rsa
+"$PYTHON" scripts/papers/search.py --tag HAWK
+```
+
+The library is text-only and ships with the skill. Refreshing it is documented
+in `assets/papers/README.md`; fetch/build scripts are in `scripts/papers/`.
 
 ## Toolkit
 

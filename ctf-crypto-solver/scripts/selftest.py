@@ -18,7 +18,7 @@ from ctfkit import blockcipher as bc
 from ctfkit import classical as cl
 from ctfkit import dh, ecc, exotic, hashx, lattice, prng, rsa, stream, zkp
 from ctfkit import pow as powkit
-from ctfkit import util
+from ctfkit import pqc, util
 
 PASS = 0
 FAIL = []
@@ -284,6 +284,22 @@ def test_lattice():
         leaked.append(li)
     check("ecdsa hnp", d_hnp in lattice.ecdsa_partial_nonce_recover(q, rs, ss, hs, leaked, 8))
 
+    # Generic HNP with partially-known errors (truncated-PRNG / nonce style)
+    q_g = 2**64 - 59
+    rng = random.Random(15)
+    y_g = rng.randrange(1, q_g)
+    W_g = 1 << 12
+    as_g, bs_g, ls_g = [], [], []
+    for _ in range(12):
+        a_g = rng.randrange(1, q_g)
+        delta_g = rng.randrange(W_g)
+        li_g = rng.randrange(1, (q_g - delta_g) // W_g)
+        e_g = li_g * W_g + delta_g
+        as_g.append(a_g)
+        bs_g.append((e_g - a_g * y_g) % q_g)
+        ls_g.append(li_g)
+    check("hnp partial bits", y_g in lattice.hnp_partial_bits(as_g, bs_g, q_g, ls_g, 12))
+
     # Low-density subset sum
     rng = random.Random(6)
     weights = [rng.randrange(1, 1 << 60) for _ in range(16)]
@@ -308,6 +324,21 @@ def test_lattice():
     ]
     got_s, _got_e = lattice.lwe_cvp_solve(A_lwe, b_lwe, q_lwe)
     check("lwe cvp", got_s == s_lwe)
+
+    # LWE with extra linear hints (<v,s> = l mod q)
+    rng = random.Random(21)
+    n_h, m_h, q_h = 6, 12, 257
+    s_h = [rng.choice([-1, 0, 1]) for _ in range(n_h)]
+    e_h = [rng.randrange(-1, 2) for _ in range(m_h)]
+    A_h = [[rng.randrange(q_h) for _ in range(n_h)] for _ in range(m_h)]
+    b_h = [(sum(A_h[i][j] * s_h[j] for j in range(n_h)) + e_h[i]) % q_h
+           for i in range(m_h)]
+    hints = []
+    for _ in range(3):
+        v = [rng.choice([-1, 0, 1]) for _ in range(n_h)]
+        hints.append((v, sum(v[j] * s_h[j] for j in range(n_h)) % q_h))
+    got_h, _ = lattice.lwe_with_hints(A_h, b_h, q_h, hints)
+    check("lwe hints", got_h == s_h)
 
     # NTRU (toy parameters)
     N_ntru, q_ntru = 12, 97
@@ -334,6 +365,28 @@ def test_lattice():
             for f2, g2 in cands
         ),
     )
+
+
+def test_pqc():
+    section("pqc")
+    check("detect kyber", "ML-KEM/Kyber" in pqc.detect(q=3329))
+    check("detect dilithium", "ML-DSA/Dilithium" in pqc.detect(q=8380417))
+    N, q = 8, 97
+    rng = random.Random(3)
+    h = [rng.randrange(q) for _ in range(N)]
+    g = [rng.randrange(q) for _ in range(N)]
+    M = pqc.negacyclic_matrix(h, q, True)
+    prod = [sum(M[i][j] * g[j] for j in range(N)) % q for i in range(N)]
+    check("negacyclic matrix", prod == lattice.ntru_mul(h, g, q, True))
+    # tiny-noise flattening to LWE
+    n_f, m_f, q_f = 6, 12, 3329
+    s_f = [rng.choice([-1, 0, 1]) for _ in range(n_f)]
+    e_f = [rng.randrange(-1, 2) for _ in range(m_f)]
+    A_f = [[rng.randrange(q_f) for _ in range(n_f)] for _ in range(m_f)]
+    b_f = [(sum(A_f[i][j] * s_f[j] for j in range(n_f)) + e_f[i]) % q_f
+           for i in range(m_f)]
+    got, _ = pqc.flatten_lwe(A_f, b_f, q_f)
+    check("flatten lwe", got == s_f)
 
 
 def test_prng():
@@ -413,6 +466,27 @@ def test_blockcipher():
         gcm_ok = False
     check("gcm forge", gcm_ok)
 
+    # Multi-block / unequal-length nonce reuse (general forbidden attack)
+    mk, mn = os.urandom(16), os.urandom(12)
+    aad1, aad2, aad3 = b"hdr-1", b"a-longer-header", b"target"
+    p1, p2, p3 = os.urandom(48), os.urandom(80), os.urandom(37)
+
+    def _gcm(pt, aad):
+        cc = AES.new(mk, AES.MODE_GCM, nonce=mn)
+        cc.update(aad)
+        return cc.encrypt_and_digest(pt)
+
+    c1m, t1m = _gcm(p1, aad1)
+    c2m, t2m = _gcm(p2, aad2)
+    c3m, t3m = _gcm(p3, aad3)
+    H_true = int.from_bytes(AES.new(mk, AES.MODE_ECB).encrypt(b"\x00" * 16), "big")
+    cands = bc.gcm_recover_h_multi(c1m, t1m, c2m, t2m, aad1, aad2)
+    check("gcm multi H", H_true in cands)
+    if H_true in cands:
+        mask = bc.gcm_j0_mask(H_true, aad1, c1m, t1m)
+        forged = bc.gcm_forge_tag(H_true, mask, aad3, c3m)
+        check("gcm multi forge", forged == t3m)
+
 
 def test_ecc():
     section("ecc")
@@ -483,6 +557,7 @@ def main():
     test_classical()
     test_rsa()
     test_lattice()
+    test_pqc()
     test_prng()
     test_dh()
     test_stream()

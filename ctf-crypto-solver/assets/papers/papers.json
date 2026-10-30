@@ -1,0 +1,1550 @@
+[
+ {
+  "id": "2026/2654",
+  "title": "When Algebraic Structure Meets Too Many Hints",
+  "authors": "Dongshu Cai, Yijian Liu, Xianhui Lu",
+  "date": "2026-10-27",
+  "direction": "lattice-lwe-hints",
+  "tags": [
+   "LWE hints",
+   "NTT",
+   "Kyber",
+   "结构"
+  ],
+  "summary": "指出 DDGR hint 分类与“too many hints”阈值只是语法层描述：在 Kyber-512 上，NTT 域残差虽形式上是 mod-q hint，却只需约一半的均匀界；有限精度 FFT 样本属近似 hint，却只需 25%–55% 的 hint 预算。结论是评估真实泄漏必须考虑 hint 向量的代数结构。",
+  "ctf_relevance": 5,
+  "ctf_note": "结构化 hint 的必读论文",
+  "mapped": "lwe_hints.sage",
+  "url": "https://eprint.iacr.org/2026/2654"
+ },
+ {
+  "id": "2026/2638",
+  "title": "Decision Attacks on Known-Covariance Ring-LWE via Public Gram Determinants",
+  "authors": "Anis Bkakria",
+  "date": "2026-10-25",
+  "direction": "lattice-lwe-hints",
+  "tags": [
+   "Ring-LWE",
+   "known covariance",
+   "判定攻击"
+  ],
+  "summary": "研究 Known-Covariance RLWE（公开 secret/error 的精确二次摘要），利用公开样本与协方差 hint 构成 bordered Gram 矩阵，其行列式暴露分布不同的残量，从而给出多项式时间判定攻击；覆盖多类奇素数模，并讨论复合模的因子归约迁移。",
+  "ctf_relevance": 3,
+  "ctf_note": "带协方差泄漏的 RLWE",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/2638"
+ },
+ {
+  "id": "2026/2565",
+  "title": "Further Elaborations on the Provable Dual Attack",
+  "authors": "Kaveh Bashiri",
+  "date": "2026-10-20",
+  "direction": "lattice-lwe-hints",
+  "tags": [
+   "provable dual",
+   "ML-KEM",
+   "ML-DSA"
+  ],
+  "summary": "给出无启发式假设的 provable dual attack，统一 Pouly–Shen 与 Bashiri–Wiemers 的方法，用错误的候选的一阶矩估计去掉若干假设。ML-KEM 上比首个 provable dual 改进 22–52 bit（有界秩时 47–100 bit），并实验演示 ML-DSA 小实例；作者声明不威胁两者安全。",
+  "ctf_relevance": 2,
+  "ctf_note": "参数评估",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/2565"
+ },
+ {
+  "id": "2026/2186",
+  "title": "Provable FFT-Accelerated Dual Attack on LWE Using the General Dual Lattice",
+  "authors": "Jiale Li, Li-Ping Wang, Huaxiong Wang",
+  "date": "2026-09-23",
+  "direction": "lattice-lwe-hints",
+  "tags": [
+   "provable dual",
+   "FFT",
+   "一般对偶格"
+  ],
+  "summary": "把 Guo–Johansson 型 FFT dual attack 的正确性分析从正交格推广到一般对偶格 L_q(A^T)，把所需样本从 m≈2n 降到 m≈n。ML-KEM 成本 216/317/426 bit，比之前最好的 provable dual 降 22/30/52 bit。",
+  "ctf_relevance": 2,
+  "ctf_note": "参数评估",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/2186"
+ },
+ {
+  "id": "2026/2166",
+  "title": "A Provable Correctness Analysis of the MATZOV-Style FFT Dual Attack on ML-KEM",
+  "authors": "Jiale Li, Li-Ping Wang, Huaxiong Wang",
+  "date": "2026-09-23",
+  "direction": "lattice-lwe-hints",
+  "tags": [
+   "dual attack",
+   "ML-KEM",
+   "正确性分析"
+  ],
+  "summary": "对 MATZOV 型 FFT dual attack 给出严格正确性分析（分别处理正确/错误候选），得到 ML-KEM-512/768/1024 的攻击成本 210/300/410 bit，相比基线降低 28/47/68 bit。",
+  "ctf_relevance": 2,
+  "ctf_note": "参数评估",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/2166"
+ },
+ {
+  "id": "2026/2117",
+  "title": "Provable dual attack on LWE via lattice projection",
+  "authors": "Hongyuan Qu, Chengliang Tian, Geng Wang, Guangwu Xu",
+  "date": "2026-09-20",
+  "direction": "lattice-lwe-hints",
+  "tags": [
+   "provable dual",
+   "格投影"
+  ],
+  "summary": "发现当格的第一极小值较大时可显著改进 Banaszczyk 不等式，并据此提出基于格投影的 provable dual attack：在选定的子格上采样，降低维数从而加速离散高斯采样。相比原框架提升 26.1–43.7 bit。",
+  "ctf_relevance": 2,
+  "ctf_note": "参数评估",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/2117"
+ },
+ {
+  "id": "2026/1720",
+  "title": "Improved Polynomial-Memory Algorithms via Nested Collision Search: Applications to Small Max-Norm LWE and Subset-Sum",
+  "authors": "Abul Kalam, Sudeshna Karmakar, Santanu Sarkar",
+  "date": "2026-08-18",
+  "direction": "lattice-lwe-hints",
+  "tags": [
+   "LWE",
+   "subset-sum",
+   "碰撞搜索"
+  ],
+  "summary": "用精化的嵌套碰撞搜索与新的表示结构，在保持多项式内存的前提下改进小 max-norm LWE 的渐近复杂度：三元 secret 从 2^{0.926n} 降到 2^{0.8595n}；并略改进随机子集和的 2^{0.645n}→2^{0.6432n}。",
+  "ctf_relevance": 3,
+  "ctf_note": "小范数 LWE / 子集和",
+  "mapped": "lwe_bkz.sage",
+  "url": "https://eprint.iacr.org/2026/1720"
+ },
+ {
+  "id": "2026/1400",
+  "title": "What Happens When Integrating Modulus Switching and Lossy Source Coding: A New Dual Attack Variant on LWE",
+  "authors": "Yechen Li, Qunxiong Zheng",
+  "date": "2026-10-13",
+  "direction": "lattice-lwe-hints",
+  "tags": [
+   "dual attack",
+   "FFT",
+   "modulus switching"
+  ],
+  "summary": "把模切换与有损信源编码结合进 dual-sieve-FFT 攻击，使 FFT 枚举规模从 q^{n_fft} 降到 p^{k_fft}；Kyber 上总复杂度有改进，解码/FFT 成本分别降 1–6 与 2–7 bit。",
+  "ctf_relevance": 2,
+  "ctf_note": "参数评估",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/1400"
+ },
+ {
+  "id": "2026/1326",
+  "title": "LaMS: A p-adic Layered Modulus Switching for Provable Dual Attacks on LWE",
+  "authors": "Rui-Jie Wang, Zhong-Xiao Wang, Qun-Xiong Zheng, Xuan Zhao",
+  "date": "2026-10-15",
+  "direction": "lattice-lwe-hints",
+  "tags": [
+   "dual attack",
+   "p-adic",
+   "modulus switching"
+  ],
+  "summary": "提出 p-adic 分层模切换（LaMS）：固定一个小素数 p，逐位恢复 secret 的 p-adic 展开，把 CRT 型 provable dual attack 的猜测成本从受最大 CRT 素数支配降到 O(log_p q · p^{n_guess})。修正旧工作后 Kyber 再降约 1 bit。",
+  "ctf_relevance": 2,
+  "ctf_note": "参数评估",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/1326"
+ },
+ {
+  "id": "2026/1081",
+  "title": "From Perfect to Approximate Hints: Efficient LWE Secret Recovery Leveraging Low Hamming Weight",
+  "authors": "Minki Hhan, Ga Hee Hong, Jiseung Kim, Changmin Lee, JeongHwan Lee",
+  "date": "2026-05-28",
+  "direction": "lattice-lwe-hints",
+  "tags": [
+   "LWE hints",
+   "稀疏 secret",
+   "近似 hint"
+  ],
+  "summary": "研究稀疏三元 secret 下的 perfect/approximate hint：先前需要约 n/2 个 hint，本文在 GAA 下只需 O(h log h) 个（h 为 Hamming 重量）。例如 (n,h)=(2^15,32) 只需 320 个 hint 即可多项式时间恢复，是构造 hint 格的关键参考。",
+  "ctf_relevance": 5,
+  "ctf_note": "LWE 带 hint 的核心论文",
+  "mapped": "lwe_hints.sage",
+  "url": "https://eprint.iacr.org/2026/1081"
+ },
+ {
+  "id": "2026/1060",
+  "title": "An Improved Hybrid Dual Attack on LWE with Sparse Secrets and its Application to FHE",
+  "authors": "Lei Bi, Yijian Liu, Xianhui Lu, Junjie Luo, Kunpeng Wang",
+  "date": "2026-05-26",
+  "direction": "lattice-lwe-hints",
+  "tags": [
+   "hybrid dual",
+   "稀疏 secret",
+   "FHE"
+  ],
+  "summary": "系统分析 May MITM 的不同 list/hash 变体，提出改进的 hybrid dual attack，缓解错误枚举与 hash 标签瓶颈，并给出不依赖问题独立性假设的分析。使 EUROCRYPT 2024 的加速 BGV 最多降 18 bit。",
+  "ctf_relevance": 3,
+  "ctf_note": "FHE 稀疏 secret",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/1060"
+ },
+ {
+  "id": "2026/1048",
+  "title": "Unified Dual Attack Analyses: Covariance-Based Score Distribution Prediction for LWE",
+  "authors": "Yechen Li, Qunxiong Zheng",
+  "date": "2026-10-14",
+  "direction": "lattice-lwe-hints",
+  "tags": [
+   "dual attack",
+   "分数分布"
+  ],
+  "summary": "提出统一的 dual attack 分数期望/方差预测模型，覆盖原始 dual、带模切换的 dual、带 decoding 的 dual 三类；关键观察是不同短向量夹角的余弦近似正态分布，据此估计分数协方差。相比以往独立性假设，在中高维下更准确，并扩展了 Ducas–Pulles 对错误猜测尾部行为的刻画。",
+  "ctf_relevance": 2,
+  "ctf_note": "参数评估",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/1048"
+ },
+ {
+  "id": "2026/1041",
+  "title": "CoNAN: A Structure-Aware Framework for Lattice Cryptanalysis",
+  "authors": "Ali Raya, Vikas Kumar, Kushal Dey, Sugata Gangopadhyay",
+  "date": "2026-05-23",
+  "direction": "lattice-lwe-hints",
+  "tags": [
+   "结构感知",
+   "格分析框架"
+  ],
+  "summary": "CoNAN 是结构感知的格安全估计框架：常见估计器对不同代数结构“一视同仁”，而代数诱导的同态可得到更低维的格表示，从而更高效地攻击。以 NTRU 类构造为主，复现 NTRU Composite、BQTRU、multivariate LWE 等已知攻击，并指出非交换群环/半直积上的 LWE 具体安全比标准估计低至少 60 bit。",
+  "ctf_relevance": 3,
+  "ctf_note": "环/模结构利用",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/1041"
+ },
+ {
+  "id": "2026/688",
+  "title": "Too Far Behind? Narrowing the Gap with a Dual-Enhanced Two-Stage Algebraic Algorithm for LWE",
+  "authors": "Rui-Jie Wang, Hong-Sen Yang, Zhong-Xiao Wang, Qun-Xiong Zheng, Ye-Chen Li",
+  "date": "2026-05-23",
+  "direction": "lattice-lwe-hints",
+  "tags": [
+   "LWE",
+   "dual",
+   "Arora-Ge",
+   "hints"
+  ],
+  "summary": "提出两阶段代数算法：先用 dual 格归约把样本降到低维（变量变少、噪声变大），再用利用错误分布的新多项式构造 + resultant 解系统，替代经典 Arora-Ge。可直接纳入 perfect/modular/approximate hints。",
+  "ctf_relevance": 4,
+  "ctf_note": "少样本 LWE + hint",
+  "mapped": "lwe_hints.sage",
+  "url": "https://eprint.iacr.org/2026/688"
+ },
+ {
+  "id": "2026/630",
+  "title": "Asymptotic Analysis of Ternary Sparse LWE",
+  "authors": "Byoungchan Chi, Nathan Cho, Jiseung Kim, Changmin Lee",
+  "date": "2026-03-31",
+  "direction": "lattice-lwe-hints",
+  "tags": [
+   "ternary sparse LWE",
+   "渐近分析"
+  ],
+  "summary": "对三元稀疏 LWE 做渐近分析：q>3^k 时每行化为 k 维 SVP（筛法 2^{0.292k}），q≤3^k 时用贪心坐标恢复（O(m·k·3^k)）。结论是 k 很小时即使 n 很大也可攻。",
+  "ctf_relevance": 4,
+  "ctf_note": "小 k 稀疏 LWE",
+  "mapped": "lwe_bkz.sage",
+  "url": "https://eprint.iacr.org/2026/630"
+ },
+ {
+  "id": "2026/614",
+  "title": "Spectral Method attacks Sparse LWE, Sparse LPN and Beyond",
+  "authors": "Shashwat Agrawal, Amitabha Bagchi, Rajendra Kumar",
+  "date": "2026-07-02",
+  "direction": "lattice-lwe-hints",
+  "tags": [
+   "sparse LWE",
+   "sparse LPN",
+   "谱方法"
+  ],
+  "summary": "对任意有限环上的 k-稀疏线性方程组，给出谱方法判定右端是随机还是带噪秘密赋值，并给出样本-时间权衡；推广了 Z_2 上的 Kikuchi 方法。可用于判断 sparse LWE/LPN 实例是否可攻。",
+  "ctf_relevance": 3,
+  "ctf_note": "稀疏方程判定/攻击",
+  "mapped": "lwe_bkz.sage",
+  "url": "https://eprint.iacr.org/2026/614"
+ },
+ {
+  "id": "2026/612",
+  "title": "Improving ML Attacks on LWE with Data Repetition and Stepwise Regression",
+  "authors": "Alberto Alfarano, Eshika Saxena, Emily Wenger, François Charton, Kristin Lauter",
+  "date": "2026-03-27",
+  "direction": "lattice-lwe-hints",
+  "tags": [
+   "LWE",
+   "机器学习",
+   "稀疏 secret"
+  ],
+  "summary": "用更大训练集与重复样本，让 ML 攻击能恢复更稠密的 binary/ternary secret；并提出 stepwise regression 恢复“cool bits”。属于 ML 与格结合的方向。",
+  "ctf_relevance": 2,
+  "ctf_note": "ML 辅助 LWE（较少见）",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/612"
+ },
+ {
+  "id": "2026/421",
+  "title": "Cryptanalysis of Polynomial Learning With Errors (PLWE): A Survey",
+  "authors": "Rahinatou Yuh Njah Nchiwo",
+  "date": "2026-03-11",
+  "direction": "lattice-lwe-hints",
+  "tags": [
+   "PLWE",
+   "综述"
+  ],
+  "summary": "系统综述 PLWE 的脆弱实例与攻击，并讨论何时可迁移到 RLWE。适合作为识别“题目用了 PLWE 而非 RLWE”的索引。",
+  "ctf_relevance": 3,
+  "ctf_note": "PLWE/RLWE 归约错误识别",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/421"
+ },
+ {
+  "id": "2026/366",
+  "title": "Careful with the Ring: Enhanced Hybrid Decoding Attacks against Module/Ring-LWE",
+  "authors": "Jianhua Hou, Haodong Jiang",
+  "date": "2026-08-30",
+  "direction": "lattice-lwe-hints",
+  "tags": [
+   "Ring-LWE",
+   "hybrid decoding",
+   "稀疏 secret"
+  ],
+  "summary": "利用多项式环 Z_q[x]/(x^N+1) 的结构加速 hybrid decoding 的猜测与解码步骤，稀疏 secret 下复杂度改善线性于 N。在 FHE 基准上比 SOTA 快 17–114 倍，16 组参数中 12 组降到 128-bit 以下，最多降 13 bit。",
+  "ctf_relevance": 4,
+  "ctf_note": "稀疏 Ring-LWE/FHE 参数",
+  "mapped": "lwe_bkz.sage",
+  "url": "https://eprint.iacr.org/2026/366"
+ },
+ {
+  "id": "2026/279",
+  "title": "On the Concrete Hardness Gap Between MLWE and LWE",
+  "authors": "Tabitha Ogilvie",
+  "date": "2026-10-04",
+  "direction": "lattice-lwe-hints",
+  "tags": [
+   "MLWE",
+   "系数等距",
+   "hybrid"
+  ],
+  "summary": "指出“把 MLWE 等价为 LWE 估计安全”的启发式在真实参数下失效：二次分圆环存在系数等距（signed permutation），可产生共享 A 的多个派生实例，与 hybrid attack 的离线预处理复用。稀疏 RLWE 最多出现 14.2 bit 差距，Kyber/ML-KEM 约 1 bit。",
+  "ctf_relevance": 3,
+  "ctf_note": "环对称性导致的 MLWE/LWE 难度差",
+  "mapped": "lwe_bkz.sage",
+  "url": "https://eprint.iacr.org/2026/279"
+ },
+ {
+  "id": "2026/177",
+  "title": "A Practical Neighborhood Search Attack on Oracle MLWE",
+  "authors": "Hongxiao Wang, Muhammed F. Esgin, Ron Steinfeld, Markku-Juhani O. Saarinen, Siu-Ming Yiu",
+  "date": "2026-04-11",
+  "direction": "lattice-lwe-hints",
+  "tags": [
+   "Oracle MLWE",
+   "泄漏",
+   "邻域搜索"
+  ],
+  "summary": "针对 Oracle MLWE（允许对 secret 的掩码线性泄漏）提出邻域搜索攻击：利用敌手可选的挑战矩阵、小环维数与低范数 secret，通过有界搜索恢复舍入误差，进而恢复 MLWE secret。作者用 Sage 实现，对 Asiacrypt 2025 的 mmKEM 参数几秒内恢复他人封装密钥，推翻其 128-bit 安全声明。",
+  "ctf_relevance": 4,
+  "ctf_note": "带线性泄漏/恶意公钥的 MLWE；Sage 几秒出结果",
+  "mapped": "lwe_hints.sage",
+  "url": "https://eprint.iacr.org/2026/177"
+ },
+ {
+  "id": "2026/2643",
+  "title": "Non-profiled Single-Trace ML-DSA Secret Key Recovery by Horizontal Distribution Analysis",
+  "authors": "Linus Backlund, Elena Dubrova",
+  "date": "2026-10-26",
+  "direction": "pqc-implementation",
+  "tags": [
+   "ML-DSA",
+   "单 trace",
+   "GMM"
+  ],
+  "summary": "提出非模板单 trace 攻击：用高斯混合模型比较观测样本分布与预期 Hamming 重量泄漏分布，横向堆叠 trace 获得多次观测，并用信息集解码纠正错误分类；ML-DSA-65 在 ARM Cortex-M4 上以 99% 成功率从单条 trace 恢复全密钥。",
+  "ctf_relevance": 3,
+  "ctf_note": "单 trace 侧信道",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/2643"
+ },
+ {
+  "id": "2026/2567",
+  "title": "A Systematic Evaluation of Fault Attacks and Countermeasures on ML-DSA Rejection Sampling",
+  "authors": "Yulong Meng",
+  "date": "2026-10-20",
+  "direction": "pqc-implementation",
+  "tags": [
+   "ML-DSA",
+   "rejection sampling",
+   "故障"
+  ],
+  "summary": "系统评估 ML-DSA rejection sampling 的故障攻击：证明某专利第三检查只是重复 check 2 已保证的条件，六个实施例退化为两个独立条件；3 万次故障注入显示对跳过 z-范数检查的检出率为 0，并据此在“受第三检查保护”的实现上完整恢复 s1。",
+  "ctf_relevance": 4,
+  "ctf_note": "故障攻击与对策评估",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/2567"
+ },
+ {
+  "id": "2026/2448",
+  "title": "Breaking First-Order Masked Kyber with Belief Propagation Alone",
+  "authors": "Vahid Jahandideh, Lejla Batina",
+  "date": "2026-10-12",
+  "direction": "pqc-implementation",
+  "tags": [
+   "Kyber",
+   "掩码",
+   "belief propagation"
+  ],
+  "summary": "用约 2200 条解封装功耗 trace、仅合法密文，恢复一阶掩码 Kyber768 的长期密钥：用带模板的神经网络估计两个算术 share 的 Hamming 重量分布，合成解密噪声的似然，再用带 Onsager 修正的 belief propagation 累积；无需格归约即恢复全部 1536 个 secret/error 系数。2000 trace 下 BP hint 只把 BKZ block size 从 624 降到 505，格攻击仍不可行。",
+  "ctf_relevance": 3,
+  "ctf_note": "掩码 Kyber",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/2448"
+ },
+ {
+  "id": "2026/2258",
+  "title": "Superposition Key-Recovery Attacks on Dilithium and Fiat-Shamir Signature Schemes",
+  "authors": "Carlos Cid, David Elkouss, Manuel Goulão",
+  "date": "2026-09-29",
+  "direction": "pqc-implementation",
+  "tags": [
+   "Dilithium",
+   "量子",
+   "Fiat-Shamir"
+  ],
+  "summary": "在允许量子资源与签名者交互的扩展量子模型（Q2）下，发展实现任意比特相对相位 oracle 的叠加攻击技术，利用输出仿射结构对多个格识别方案做全密钥恢复，并扩展到 Fiat-Shamir 签名。可攻破原始 CRYSTALS-Dilithium 及 NIST 第 1/2 轮提案，但 ML-DSA 最终版在标准过程中引入的修改阻止了该攻击。",
+  "ctf_relevance": 2,
+  "ctf_note": "量子对抗模型",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/2258"
+ },
+ {
+  "id": "2026/2211",
+  "title": "Structural Cryptanalysis of Polar-KEM: Direct Recovery of the Secret Isometry",
+  "authors": "Yuyang Xiao, Long Chen, Zhenfeng Zhang",
+  "date": "2026-09-25",
+  "direction": "pqc-implementation",
+  "tags": [
+   "Polar-KEM",
+   "同构",
+   "结构攻击"
+  ],
+  "summary": "对 Polar-KEM 做结构分析：其密钥生成从公开参数确定 frozen set → 极码链 → Construction-D 基 → 公开 LLL 归约，敌手可复现同一 reduced basis；若公钥 B_pk=O·B_red，则秘密正交矩阵直接由 O=B_pk·B_red^{-1} 线性代数恢复，无需解 SVP 或一般 LIP。作者还指出 erasure 参数未指定，不能作为秘密熵来修复。",
+  "ctf_relevance": 3,
+  "ctf_note": "LIP/构造缺陷",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/2211"
+ },
+ {
+  "id": "2026/2137",
+  "title": "Too Small to Hide: Single-Trace Key Recovery from  ML-KEM Key Generation",
+  "authors": "Vahid Jahandideh",
+  "date": "2026-09-21",
+  "direction": "pqc-implementation",
+  "tags": [
+   "ML-KEM",
+   "单 trace",
+   "密钥生成"
+  ],
+  "summary": "指出 ML-KEM 密钥生成的 CBD 采样与随后 NTT 泄漏互补信息：CBD 把系数存为 16-bit 补码，几乎无误差地泄漏符号；NTT 与公开 twiddle 相乘则泄漏幅度。把二者作为 hint 做 primal 格攻击，ML-KEM-768 的估计 BKZ block size 从 624 降到 129（core-SVP 2^182.2→2^37.7）。作者同时给出 CBD 内的 q-randomization 对策，把 block size 拉回 611。",
+  "ctf_relevance": 3,
+  "ctf_note": "单 trace 侧信道",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/2137"
+ },
+ {
+  "id": "2026/2124",
+  "title": "Every Signing Leaks: Breaking Falcon via Floating-Point Conversion Leakage",
+  "authors": "Yuanyuan Zhou, Weijia Wang, Yiteng Sun, Yu Yu",
+  "date": "2026-09-20",
+  "direction": "pqc-implementation",
+  "tags": [
+   "Falcon",
+   "浮点泄漏",
+   "LWE/NTRU 格"
+  ],
+  "summary": "利用 Falcon 高斯采样器在 ⌊μ⌋ 整数转回浮点时的 signed-exponent 泄漏（把中心分成 17 个区间），用 CB-MLE 估计中心分类，再以 ISD 式搜索 + LLL/BKZ 在 NTRU 格上恢复密钥。Falcon-512 仅需 20 条（-O0）/56 条（-O3）签名即 100% 恢复。",
+  "ctf_relevance": 4,
+  "ctf_note": "Falcon 侧信道 + LLL/BKZ",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/2124"
+ },
+ {
+  "id": "2026/2091",
+  "title": "Keep Track of Your Errors: Solving ILWE and Improving Attacks on ML-DSA",
+  "authors": "Mohamed ElGhamrawy, Thomas Eisenbarth, Julius Hermelink, Anja Rabich, Florian Sieck, Silvan Streit, Jonas Thietke, Zhiyuan Zhang",
+  "date": "2026-09-18",
+  "direction": "pqc-implementation",
+  "tags": [
+   "ILWE",
+   "belief propagation",
+   "ML-DSA"
+  ],
+  "summary": "指出从侧信息导出 ILWE 样本时记录误差分布可大幅减少所需签名数：由 ILWE 样本导出 distribution hints，用 belief propagation 求解；无噪声下签名需求从 1.39e8 降到 2.25e6（62×），并分析 ML-DSA 的时序泄漏。",
+  "ctf_relevance": 4,
+  "ctf_note": "ILWE / 噪声泄漏",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/2091"
+ },
+ {
+  "id": "2026/2069",
+  "title": "Default Correct: A New Fault Surface in the Comparison Booleanisation of Kyber-KEM",
+  "authors": "Anirudh Jaiswal, Abhilash Kumar Das, Dhiman Saha",
+  "date": "2026-09-17",
+  "direction": "pqc-implementation",
+  "tags": [
+   "Kyber",
+   "故障",
+   "FO 比较"
+  ],
+  "summary": "暴露 Kyber-KEM FO 比较流水线中被忽视的 Booleanisation 阶段：一次 clock glitch 可令 mismatch flag 为 0，使解封装接受任意密文。该故障位于 default-fail cmov 的上游，绕过 Xagawa 对策；在 pqm4/PQClean/参考实现上均成功，并用明文检查 oracle 单次运行恢复 Kyber-512/768/1024 全密钥。",
+  "ctf_relevance": 4,
+  "ctf_note": "故障攻击",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/2069"
+ },
+ {
+  "id": "2026/1904",
+  "title": "When Module Lattice Leaks: Horizontal Fusion Attacks on ML-DSA Implementation",
+  "authors": "Yuhan Zhao, Dalin He, Wei Cheng, Yuejun Liu, Jingdian Ming, Yongbin Zhou",
+  "date": "2026-09-11",
+  "direction": "pqc-implementation",
+  "tags": [
+   "ML-DSA",
+   "水平融合",
+   "侧信道"
+  ],
+  "summary": "揭示 ML-DSA 矩阵-向量乘中 y 的行复用：单次签名泄漏 k 个同一秘密中间值、但系数已知的实例。提出基于方差的加权融合与 INTT 代数筛，非模板攻击仅 4 条 trace 恢复 ML-DSA-87，90 条 trace 破一阶掩码实现。",
+  "ctf_relevance": 4,
+  "ctf_note": "ML-DSA 少 trace 侧信道",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/1904"
+ },
+ {
+  "id": "2026/1712",
+  "title": "Statistical Inference from Noisy Randomness Leakage for ML-DSA Attacks",
+  "authors": "Niklas Paskarbeit, Carsten Schubert, Marian Margraf, Jean-Pierre Seifert",
+  "date": "2026-08-17",
+  "direction": "pqc-implementation",
+  "tags": [
+   "ML-DSA",
+   "噪声估计",
+   "泄漏"
+  ],
+  "summary": "利用 |z̃| 的两分量混合分布，给出 bit 错误率的矩估计与每条 relation 的后验正确概率，从而修正被翻转的泄漏；作为预处理使 Schubert 等攻击所需 relation 减少 20–44%，并改善低泄漏区间的可行性。",
+  "ctf_relevance": 3,
+  "ctf_note": "ML-DSA 泄漏预处理",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/1712"
+ },
+ {
+  "id": "2026/1682",
+  "title": "Incomplete Ciphertext Comparison in ML-KEM: From an IND-CCA2 Break to Key Recovery",
+  "authors": "Bhabani Sankar Das",
+  "date": "2026-08-13",
+  "direction": "pqc-implementation",
+  "tags": [
+   "ML-KEM",
+   "FO 比较",
+   "线性泄漏"
+  ],
+  "summary": "发现 wolfSSL 手写 SIMD 的 FO 重加密比较只比较了部分密文字节（AVX2 1536/1568，NEON 约一半）。未比较的尾字节携带解密噪声的尾部，而噪声是密钥的精确线性函数；变化这些字节并观察解密输出即可逐坐标读出噪声，用最小二乘（无需格）恢复 98% 以上 ML-KEM-1024 密钥。",
+  "ctf_relevance": 4,
+  "ctf_note": "实现缺陷→线性泄漏",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/1682"
+ },
+ {
+  "id": "2026/1668",
+  "title": "A Key-Recovery Attack on TALUS-MPC in TALUS v4",
+  "authors": "Sunghyeon Jo",
+  "date": "2026-08-19",
+  "direction": "pqc-implementation",
+  "tags": [
+   "TALUS",
+   "nonce 复用",
+   "阈值"
+  ],
+  "summary": "对 TALUS-MPC v4 给出两转录攻击：协调者 + T-1 个恶意方复用同一 pooled nonce，用两个不同 challenge 的响应相减消去 nonce，在分圆域中直接恢复 s1；不需要任何 R_q 可逆假设。",
+  "ctf_relevance": 4,
+  "ctf_note": "阈值签名 nonce 复用",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/1668"
+ },
+ {
+  "id": "2026/1448",
+  "title": "Improving Skipping Fault Correction Attacks on Randomized Dilithium via MILP",
+  "authors": "Haobo Ouyang, Chaoran Wang, Guowei Liu, Lixuan Wu, Meiqin Wang, Yanhong Fan",
+  "date": "2026-07-16",
+  "direction": "pqc-implementation",
+  "tags": [
+   "Dilithium",
+   "故障攻击",
+   "MILP"
+  ],
+  "summary": "改进随机化 Dilithium 的 skipping fault correction 攻击：证明无需满秩收集，推导最小故障数 M_min 与依赖密钥的趋势，并把密钥恢复建模为 MILP；相比 Krahmer 等减少 13–26% 所需故障。",
+  "ctf_relevance": 3,
+  "ctf_note": "随机化 Dilithium 的跳过故障",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/1448"
+ },
+ {
+  "id": "2026/1386",
+  "title": "Key-Recovery Attacks on TALUS: A Cryptanalytic Note",
+  "authors": "Guilhem Niot",
+  "date": "2026-07-07",
+  "direction": "pqc-implementation",
+  "tags": [
+   "TALUS",
+   "阈值签名",
+   "线性恢复"
+  ],
+  "summary": "攻破 TALUS（阈值 ML-DSA）：Feldman commitment 用公开矩阵 A 左乘 secret 值，而 A 在 ML-DSA 各参数下左可逆，故可用高斯消元直接恢复 s1 与签名 nonce；去掉 rejection sampling 后 s2 用最小二乘从约 1e8 签名恢复。",
+  "ctf_relevance": 4,
+  "ctf_note": "协议实现缺陷→线性恢复",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/1386"
+ },
+ {
+  "id": "2026/1344",
+  "title": "Public Coefficient Matters: A Practical Differential Fault Attack on ML-DSA and HAETAE",
+  "authors": "WonGeun Shin, SeungHyeon Jeon, Daehyeon Bae, Sujin Park, HeeSeok Kim",
+  "date": "2026-06-30",
+  "direction": "pqc-implementation",
+  "tags": [
+   "ML-DSA",
+   "HAETAE",
+   "故障攻击"
+  ],
+  "summary": "指出 challenge sampling 本身是可攻击面：对确定性 ML-DSA 与 HAETAE 注入单次故障即可恢复签名密钥并伪造，且 ML-DSA 攻击无需直接访问故障 challenge，仅用公开信息即可区分预期与非预期故障（识别率 100%）。",
+  "ctf_relevance": 3,
+  "ctf_note": "故障攻击",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/1344"
+ },
+ {
+  "id": "2026/981",
+  "title": "Profiling-Device-Free SASCA Framework for ML-KEM",
+  "authors": "Yuxuan Wang",
+  "date": "2026-05-18",
+  "direction": "pqc-implementation",
+  "tags": [
+   "ML-KEM",
+   "SASCA",
+   "侧信道"
+  ],
+  "summary": "提出首个无需模板设备的 ML-KEM SASCA 框架：通过选择密文控制 NTT 输入训练泄漏模型，再利用 NTT/INTT 相似性与对抗式无监督域适应微调，在真实嵌入式设备上以相近 trace 数恢复密钥。",
+  "ctf_relevance": 2,
+  "ctf_note": "侧信道框架",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/981"
+ },
+ {
+  "id": "2026/820",
+  "title": "Improving Correlation Power Analysis on Masked CRYSTALS-Kyber with Lattice Attack",
+  "authors": "Yen-Ting Kuo, Atsushi Takayasu",
+  "date": "2026-04-27",
+  "direction": "pqc-implementation",
+  "tags": [
+   "Kyber",
+   "CPA",
+   "格嵌入"
+  ],
+  "summary": "改进掩码 Kyber 的相关功耗分析：不仅用恢复出的部分密钥，还利用每个系数的绝对值，采用 Kannan 与 Bai-Galbraith 结合的嵌入恢复符号与剩余部分。400 条 trace 即恢复全密钥（此前 7000 条），并可迁移到 SABER/Dilithium。",
+  "ctf_relevance": 4,
+  "ctf_note": "部分密钥 + Kannan/Bai-Galbraith 嵌入",
+  "mapped": "lwe_bkz.sage",
+  "url": "https://eprint.iacr.org/2026/820"
+ },
+ {
+  "id": "2026/582",
+  "title": "FrozenTRU: Cold Boot Attacks on NTRU-Based Hash-and-Sign Signatures",
+  "authors": "Hiroto Kaihara, Mehdi Tibouchi, Masayuki Abe",
+  "date": "2026-03-24",
+  "direction": "pqc-implementation",
+  "tags": [
+   "NTRU",
+   "冷启动",
+   "位翻转"
+  ],
+  "summary": "把冷启动攻击用于 Falcon 及其前身 DLP（NTRU 型 hash-and-sign 签名）：这些方案的签名私钥在内存中主要是浮点数，密钥系数间的关系只近似成立，恢复更复杂。在典型位翻转概率下，模拟可高概率恢复所有参数的 Falcon/DLP 密钥，并在 Raspberry Pi 上做了真实冷启动实验；同时给出低开销对策。",
+  "ctf_relevance": 3,
+  "ctf_note": "冷启动/部分系数泄漏 + 格",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/582"
+ },
+ {
+  "id": "2026/580",
+  "title": "Exploiting noisy single-bit leakage in ML-DSA",
+  "authors": "Kaveh Bashiri, Jan Geuenich, Johannes Mittmann",
+  "date": "2026-03-23",
+  "direction": "pqc-implementation",
+  "tags": [
+   "ML-DSA",
+   "单位泄漏",
+   "噪声"
+  ],
+  "summary": "用随机模型而非具体攻击分析 ML-DSA 的 bit 泄漏：给出成功恢复所需签名数的理论下界，并设计几乎达到该下界的攻击；bit 错误率高达 0.49、泄漏位索引低至 4/5 仍可用，无噪声时签名需求降到 1000 以下。",
+  "ctf_relevance": 4,
+  "ctf_note": "ML-DSA 单位泄漏",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/580"
+ },
+ {
+  "id": "2026/528",
+  "title": "Full Secret Key Recovery of First-order Masked Crystals-Kyber implementation using multiple distinct chosen-ciphertexts",
+  "authors": "Souhayl Ben El Haj Soulami, Yann Connan, Sylvain Duquesne",
+  "date": "2026-03-16",
+  "direction": "pqc-implementation",
+  "tags": [
+   "Kyber",
+   "掩码",
+   "侧信道"
+  ],
+  "summary": "对一阶掩码 Kyber 提出新区分器，联合多份不同密文解密请求的信息；在 SNR 0.67 的高噪声环境、75000 条 trace 下达到 95% 全密钥恢复成功率。",
+  "ctf_relevance": 3,
+  "ctf_note": "一阶掩码 Kyber",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/528"
+ },
+ {
+  "id": "2026/472",
+  "title": "Descent into Broken Trust: Uncovering ML-DSA Subkeys with Scarce Leakage and Local Optimization",
+  "authors": "Carsten Schubert, Niklas Julius Müller, Jean-Pierre Seifert, Marian Margraf",
+  "date": "2026-03-06",
+  "direction": "pqc-implementation",
+  "tags": [
+   "ML-DSA",
+   "泄漏",
+   "局部优化"
+  ],
+  "summary": "把 ML-DSA 子密钥恢复重构为约束满足问题，用局部优化（多层爬山）求解；只需 5000–35000 条 informative relation（比之前少 37–68×），并扩展到噪声模型（bit 错误率高达 45%）。",
+  "ctf_relevance": 4,
+  "ctf_note": "ML-DSA 少量泄漏签名",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/472"
+ },
+ {
+  "id": "2026/070",
+  "title": "Unlocking the True Potential of Decryption Failure Oracles: A Hybrid Adaptive-LDPC Attack on ML-KEM Using Imperfect Oracles",
+  "authors": "Qian Guo, Denis Nabokov, Thomas Johansson",
+  "date": "2026-01-16",
+  "direction": "pqc-implementation",
+  "tags": [
+   "ML-KEM",
+   "解密失败 oracle",
+   "LDPC"
+  ],
+  "summary": "重新审视 ML-KEM 的解密失败（DF）oracle：自适应查询生成 + LDPC belief propagation，在多个 secret 系数上构造平衡校验以最大化每次查询的信息量。ML-KEM-768 在 95% oracle 准确率下仅需 2950 次查询，接近 Shannon 下界。",
+  "ctf_relevance": 4,
+  "ctf_note": "解密失败/明文检查 oracle",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/070"
+ },
+ {
+  "id": "2026/064",
+  "title": "Breaking the KAZ Suite: Practical Key Recovery Attacks on MySEAL 2.0’s Post-Quantum Candidates",
+  "authors": "Zhuo Huang, Chongrong Li, Yu Yu, Xiaogang Zhou",
+  "date": "2026-02-02",
+  "direction": "pqc-implementation",
+  "tags": [
+   "PQC 假方案",
+   "光滑群阶",
+   "HNP"
+  ],
+  "summary": "完全攻破 MySEAL 2.0 的四个 KAZ 方案。primorial 模使群阶 φ(N) 极光滑，KAZ-KA/KEM 可按小素数因子枚举并解小群 DLP；KAZ-SIGN v2 的线性签名结构化为 HNP，用格归约、仅两条签名即恢复私钥。",
+  "ctf_relevance": 5,
+  "ctf_note": "光滑群阶 + 两条签名 HNP",
+  "mapped": "hnp_ecdsa.py / lwe_bkz.sage",
+  "url": "https://eprint.iacr.org/2026/064"
+ },
+ {
+  "id": "2026/056",
+  "title": "Rejection Matters: Efficient Non-Profiling Side-Channel Attack on ML-DSA via Exploiting Public Templates",
+  "authors": "Yuhan Zhao, Wei Cheng, Zehua Qiao, Yuejun Liu, Yongbin Zhou",
+  "date": "2026-01-16",
+  "direction": "pqc-implementation",
+  "tags": [
+   "ML-DSA",
+   "侧信道",
+   "non-profiling"
+  ],
+  "summary": "利用被拒签名与最终接受签名的双重泄漏，提出基于公开数据的模板（PTA）再做 CPA；ML-DSA-44 上 96 条 trace 恢复 challenge c、约 300 条恢复密钥，比先前少 10×，且 hedged 模式同样无效。",
+  "ctf_relevance": 4,
+  "ctf_note": "ML-DSA 非模板侧信道",
+  "mapped": "pqc 侧信道流程（待补）",
+  "url": "https://eprint.iacr.org/2026/056"
+ },
+ {
+  "id": "2026/2543",
+  "title": "A Key-Recovery Attack on the GTLN Knapsack Cryptosystem via Continued Fractions",
+  "authors": "Shiyi zhou, Yingpu Deng, Shi Ying",
+  "date": "2026-10-19",
+  "direction": "sis-lip-ideal",
+  "tags": [
+   "knapsack",
+   "连分数",
+   "密钥恢复"
+  ],
+  "summary": "对 GTLN knapsack 公钥给出连分数攻击：公钥差值之比逼近小分母有理数，可精确恢复；整除关系经 gcd 得到两个私钥整数的倍数，再用有界余因子搜索与模逆恢复模数与 shift。2400 次试验全部成功，每次 <0.05 秒。",
+  "ctf_relevance": 4,
+  "ctf_note": "knapsack 公钥秒破",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/2543"
+ },
+ {
+  "id": "2026/2527",
+  "title": "How Secure are NTRU+ Keys? Analysing the Best Module Attacks",
+  "authors": "Paola de Perthuis, Filip Trenkić",
+  "date": "2026-10-18",
+  "direction": "sis-lip-ideal",
+  "tags": [
+   "NTRU+",
+   "module-BKZ",
+   "参数评估"
+  ],
+  "summary": "分析 module-BKZ 对 NTRU+（韩国 KEM 标准）的实际威胁：引入相对 canonical/系数嵌入，刻画不同子域下嵌入何时一致（rad(c)/rad(ℓ)∈{1,2}），指出短向量在系数几何中短而 module-BKZ 在 canonical 几何中工作。结论是最佳攻击仅省 4–10 个 blocksize，NTRU+ 最多损失 3 bit。",
+  "ctf_relevance": 3,
+  "ctf_note": "NTRU+/module 攻击",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/2527"
+ },
+ {
+  "id": "2026/2420",
+  "title": "Provable Subexponential Algorithms for Module-SIS and Module-LWE",
+  "authors": "William Youmans",
+  "date": "2026-10-08",
+  "direction": "sis-lip-ideal",
+  "tags": [
+   "Module-SIS",
+   "Module-LWE",
+   "次指数"
+  ],
+  "summary": "把 Ducas–Engelberts–Loyer 的 Wagner 型可证明次指数算法推广到二次分圆环上的 module 矩阵（任意剩余次数），给出 Module-SIS 与 decision/search Module-LWE 的次指数时间；并证明保样本的 scalar search-LWE 与 narrow Module-LWE 算法。",
+  "ctf_relevance": 2,
+  "ctf_note": "参数评估",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/2420"
+ },
+ {
+  "id": "2026/2381",
+  "title": "The Lattice Isomorphism Problem with Hints",
+  "authors": "Mélissa Rossi",
+  "date": "2026-10-06",
+  "direction": "sis-lip-ideal",
+  "tags": [
+   "LIP",
+   "hints",
+   "HAWK"
+  ],
+  "summary": "研究带部分信息的 LIP：把 LIP 嵌入到与 HAWK 规范不同的 SVP 格以容纳 hint，并给出把任意线性组合上的泄漏转换为目标格 hint 的技术。用 LeakyLWEEstimator 估计 HAWK 密钥恢复安全，指出签名本身携带密钥信息，HAWK-1024 约损失 11 bit。",
+  "ctf_relevance": 4,
+  "ctf_note": "LIP + 侧信道 hint",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/2381"
+ },
+ {
+  "id": "2026/2325",
+  "title": "On the hull attacks against Construction A lattices",
+  "authors": "Jean-François Biasse, Alexandra V. Hostetler, Anuvrat Jaindungarwal",
+  "date": "2026-10-03",
+  "direction": "sis-lip-ideal",
+  "tags": [
+   "LIP",
+   "Construction A",
+   "hull"
+  ],
+  "summary": "把 Ducas–Gibbons 的方法推广到 hull 维数任意的 Construction A 格：给出解 LIP 的算法，运行时间 2^O(n)，成功概率 1+o(1)（对随机码），突破了原方法只支持平凡 hull 的限制。",
+  "ctf_relevance": 3,
+  "ctf_note": "LIP",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/2325"
+ },
+ {
+  "id": "2026/2281",
+  "title": "Poisoned Cryptography: Solving Direct-Sum LIP in Half the Dimension",
+  "authors": "Artyom Kuninets, Aleksandr Bakharev",
+  "date": "2026-09-30",
+  "direction": "sis-lip-ideal",
+  "tags": [
+   "LIP",
+   "direct sum",
+   "Barnes-Wall"
+  ],
+  "summary": "分析 Ducas–van Woerden 框架在两个缩放 Barnes-Wall 格直和上的实例：g^2-hull 可由公钥计算，把两类格互相映射并把问题拆成半维 Barnes-Wall 格的同构问题。d=1024,g=43 时密钥恢复成本从 220 降到 124 bit。",
+  "ctf_relevance": 3,
+  "ctf_note": "LIP 降维",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/2281"
+ },
+ {
+  "id": "2026/2225",
+  "title": "Breaking the G\\'omez-Torrecillas--Lobillo--Navarro Cryptosystem: LLL Recovers the Secret Key Within Seconds",
+  "authors": "Abul Kalam, Santanu Sarkar",
+  "date": "2026-09-26",
+  "direction": "sis-lip-ideal",
+  "tags": [
+   "knapsack",
+   "LLL",
+   "密钥恢复"
+  ],
+  "summary": "攻破 GTLN 的 knapsack McEliece 型公钥：利用系数和为 0 的公开项组合消去掩码，若该组合与公钥正交且足够短，则其坐标可被私钥整数整除；模数造成的范数间隙使 LLL 可恢复这些短向量，再用 gcd 恢复私钥。Sage 实现在 3 秒内破全部 24 组参数。",
+  "ctf_relevance": 4,
+  "ctf_note": "knapsack 公钥秒破",
+  "mapped": "lwe_bkz.sage",
+  "url": "https://eprint.iacr.org/2026/2225"
+ },
+ {
+  "id": "2026/2198",
+  "title": "Lifting Symmetries for Dimension Reduction in Module-LIP: rank 2 and rank 4",
+  "authors": "Hengyi Luo, Kaijie Jiang, Yanbin Pan",
+  "date": "2026-09-24",
+  "direction": "sis-lip-ideal",
+  "tags": [
+   "module-LIP",
+   "降维",
+   "rank 4"
+  ],
+  "summary": "用对称平方与 Hodge star 对 module-LIP 做降维：rank-2 复现 3n/4+1 的界，rank-4 则用外平方上的共轭 Hodge star 公开构造等距于 Z^{3n} 的格，把 4n 维问题降到至多 3n/2+1 维 SVP 调用（通用界为 2n+1）。",
+  "ctf_relevance": 3,
+  "ctf_note": "HAWK/module-LIP",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/2198"
+ },
+ {
+  "id": "2026/2083",
+  "title": "Two-Bit Lifting for Ternary SIS: Polynomial-Time Collision Attacks on LtHash",
+  "authors": "Rui Ding, Xiaorui Gong, Hao Jiang, Lili Tang",
+  "date": "2026-09-18",
+  "direction": "sis-lip-ideal",
+  "tags": [
+   "SIS",
+   "LtHash",
+   "碰撞"
+  ],
+  "summary": "改进 Regev–CLZ 的三元 SIS mod 2^d 算法：每层消去两个模数 bit 而保持三元系数，把 LtHash 碰撞所需查询从 O(N^d) 降到 O(N^{ceil(d/2)})。对 Facebook/Solana 使用的 LtHash16 (N,d)=(1024,16) 约需 2^81 次查询、≤2^101 次 F2 运算，远低于宣称的 200-bit 安全。",
+  "ctf_relevance": 4,
+  "ctf_note": "SIS/LtHash 碰撞",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/2083"
+ },
+ {
+  "id": "2026/2042",
+  "title": "On Solving Ideal-SVP and Ideal-BDD with Group Representations",
+  "authors": "Hongyuan Qu, Guangwu Xu",
+  "date": "2026-09-15",
+  "direction": "sis-lip-ideal",
+  "tags": [
+   "Ideal-SVP",
+   "Ideal-BDD",
+   "群表示"
+  ],
+  "summary": "用群表示论解 Ideal-uSVP 与 Ideal-BDD：对 Galois 群已知的 abelian 扩张，用稳定子群 H 的不可约表示构造投影算子，把理想分解为低维格并分别求解再组合。首次把群表示直接用于格密码分析，并可处理 BDD。",
+  "ctf_relevance": 3,
+  "ctf_note": "理想格降维",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/2042"
+ },
+ {
+  "id": "2026/1755",
+  "title": "QuaILLL: Quaternion Ideal LLL and BKZ",
+  "authors": "Joshua Limbrey, Cong Ling, Christian Porter",
+  "date": "2026-08-20",
+  "direction": "sis-lip-ideal",
+  "tags": [
+   "四元数",
+   "LLL/BKZ",
+   "module-LIP"
+  ],
+  "summary": "给出首个用于密码场景的四元数环格归约算法与四元数 BKZ：扩展到非极大序上的 LLL（先在 Euclidean overlattice 上归约再后处理），并应用于 nrd-PIP/module-LIP 的理想格，维数比标准实嵌入小 4×。",
+  "ctf_relevance": 3,
+  "ctf_note": "HAWK/nrd-PIP",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/1755"
+ },
+ {
+  "id": "2026/1705",
+  "title": "New Attacks on Mersenne Number-Based Cryptosystems: Relaxing Size Constraints",
+  "authors": "Mengce Zheng, Abderrahmane Nitaj",
+  "date": "2026-08-16",
+  "direction": "sis-lip-ideal",
+  "tags": [
+   "AJPS",
+   "NTRU",
+   "Mersenne"
+  ],
+  "summary": "重新分析基于 Mersenne 数的 AJPS 密码系统，用连分数与模多项式方程的格求解（而非直接格归约）放宽未知私钥的尺寸约束，扩大弱密钥攻击范围并提高非平衡参数下的成功率。",
+  "ctf_relevance": 3,
+  "ctf_note": "NTRU 变体",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/1705"
+ },
+ {
+  "id": "2026/1642",
+  "title": "A Torus-Structured Generalisation of NTRU: the NTC Assumption, its Cryptanalysis, and a Compact KEM",
+  "authors": "Sidoine Djimnaibeye, Djiby Sow, Mahamat Borgou Hassan",
+  "date": "2026-08-14",
+  "direction": "sis-lip-ideal",
+  "tags": [
+   "NTC",
+   "NTRU 推广",
+   "构造+分析"
+  ],
+  "summary": "提出 NTC（Noisy Torus Conjugation）假设：短 secret 限制在非分裂极大环面中，通过共轭作用于均匀矩阵并加短误差，NTRU 是其 k=1 特例。含结构理论、search-to-decision 归约与格攻击分析，并给出紧凑 KEM；属构造+分析，CTF 中用于识别新型 NTRU 变体。",
+  "ctf_relevance": 2,
+  "ctf_note": "NTRU 变体识别",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/1642"
+ },
+ {
+  "id": "2026/1593",
+  "title": "HAWK-$n$ Key Recovery Reduces to SVP in Dimension $n/2 + 1$",
+  "authors": "Zygimantas Straznickas, Stephen A. Weis",
+  "date": "2026-08-03",
+  "direction": "sis-lip-ideal",
+  "tags": [
+   "HAWK",
+   "SVP",
+   "密钥恢复"
+  ],
+  "summary": "给出无条件确定性多项式时间归约：HAWK-n 密钥恢复可归约为维数 n/2+1 的精确 SVP 调用，利用 Galois 对合 τ:ζ↦−ζ 提供的密钥格自同构。门计数模型下 HAWK-512 从 2^150 降到 2^108、HAWK-1024 从 2^288 降到 2^182，并端到端恢复 HAWK-256；对 conductor 为 p^k/2p^k 的参数无效。",
+  "ctf_relevance": 4,
+  "ctf_note": "HAWK 归约到 SVP",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/1593"
+ },
+ {
+  "id": "2026/1560",
+  "title": "Dimension Reduction for SVP in Hawk: A Trace-Zero Approach",
+  "authors": "Guilhem Mureau, Alice Pellet-Mary",
+  "date": "2026-08-03",
+  "direction": "sis-lip-ideal",
+  "tags": [
+   "HAWK",
+   "SVP",
+   "trace-zero"
+  ],
+  "summary": "利用 trace-zero 方法，把 O_E 上的 rank-2 module-LIP 多项式时间归约到 O_K 上的 rank-3 module-LIP；对 HAWK 的 O_E^2 得到维数至多 3m/8+1 的精确 SVP 调用即可破密钥恢复（此前为 m/2+1）。",
+  "ctf_relevance": 3,
+  "ctf_note": "HAWK/理想格降维",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/1560"
+ },
+ {
+  "id": "2026/1554",
+  "title": "On the Hardness of some Vandermonde Knapsack problems",
+  "authors": "Dipayan Das, Arindam Mukherjee",
+  "date": "2026-08-15",
+  "direction": "sis-lip-ideal",
+  "tags": [
+   "Vandermonde Knapsack",
+   "vSIS",
+   "环"
+  ],
+  "summary": "研究 Vandermonde Knapsack 家族（含 PV Knapsack 与 vSIS commitment）：对二次分圆环给出新攻击，结合 Das–Joux 攻击证明比已知更大比例的密钥是弱密钥，并扩展到整数版 vSIS 的特定参数区间。",
+  "ctf_relevance": 3,
+  "ctf_note": "代数 knapsack",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/1554"
+ },
+ {
+  "id": "2026/1377",
+  "title": "HAWK ``Guessing Game'' is not Polynomial-Time",
+  "authors": "Markku-Juhani O. Saarinen",
+  "date": "2026-07-05",
+  "direction": "sis-lip-ideal",
+  "tags": [
+   "HAWK",
+   "复杂度"
+  ],
+  "summary": "实现并实验“Guessing Game”攻击，指出其运行时间远高于声称的多项式时间，存在超多项式的类数障碍，并给出机器检验的条件归约；结论是该攻击当前不威胁 HAWK。",
+  "ctf_relevance": 2,
+  "ctf_note": "HAWK 攻击可行性",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/1377"
+ },
+ {
+  "id": "2026/1349",
+  "title": "Sharper and Closed-Form Attacks on $\\mathsf{SIS}$ When Modulus Is Small",
+  "authors": "Navid Abapour",
+  "date": "2026-06-30",
+  "direction": "sis-lip-ideal",
+  "tags": [
+   "SIS",
+   "Large Norm",
+   "Falcon",
+   "Dilithium"
+  ],
+  "summary": "改进 Ducas–Espitau–Postlethwaite 的 Large Norm 攻击成本模型（计入筛法长度分布、用联合概率），使 Falcon-256 成本降低约 11×；并提出闭式 ℓ∞ 变体（Z-shape 攻击）攻击小到中等模数的 Dilithium 型 ISIS^∞，三种预设均 ≤1.6 秒。",
+  "ctf_relevance": 4,
+  "ctf_note": "小模数 SIS/伪造",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/1349"
+ },
+ {
+  "id": "2026/1318",
+  "title": "Cryptanalysis of HAWK: a Guessing Game",
+  "authors": "Ben Nelson, Joshua Limbrey, Cong Ling, Andrew Mendelsohn",
+  "date": "2026-07-05",
+  "direction": "sis-lip-ideal",
+  "tags": [
+   "HAWK",
+   "module-LIP",
+   "nrdPIP"
+  ],
+  "summary": "给出恢复 HAWK 私钥的经典算法：把 rank-2 module-LIP 归约到 O-nrdPIP，用随机下三角幺模矩阵共轭公钥 Gram 矩阵并重采样直到出现可用 Lenstra–Silverberg 子域求解的实例。后续作者承认其中启发式不足以支撑多项式时间。",
+  "ctf_relevance": 3,
+  "ctf_note": "HAWK 启发式攻击",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/1318"
+ },
+ {
+  "id": "2026/1298",
+  "title": "Weak Keys Break the BUFF Security of HAWK",
+  "authors": "Quang Dao",
+  "date": "2026-06-21",
+  "direction": "sis-lip-ideal",
+  "tags": [
+   "HAWK",
+   "弱密钥",
+   "BUFF"
+  ],
+  "summary": "反驳 HAWK 规范“天然满足 BUFF”的声明：参考验证器几乎不检查公钥，构造退化弱公钥可使全零签名对几乎所有 challenge 通过，从而破坏 message-bound signatures、exclusive ownership 与非重签名性。",
+  "ctf_relevance": 3,
+  "ctf_note": "弱公钥/校验缺失",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/1298"
+ },
+ {
+  "id": "2026/890",
+  "title": "Cryptanalysis of Definite and Indefinite Lattice Isomorphism Problems With Applications to DEFI",
+  "authors": "Markus Kirschmer, Cong Ling, Ali Sadreddin",
+  "date": "2026-06-17",
+  "direction": "sis-lip-ideal",
+  "tags": [
+   "LIP",
+   "DEFI",
+   "二次型"
+  ],
+  "summary": "结合二次型算术与算法，攻击基于各向同性二次型的 DEFIv2 签名：证明在若干假设下 genus、spinor genus 与等价类重合，从而对 Decision/Distinguishing-LIP 有多项式时间算法，并在作者公开挑战上分钟级伪造签名；对 HAWK 无效。",
+  "ctf_relevance": 4,
+  "ctf_note": "LIP 签名密钥恢复",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/890"
+ },
+ {
+  "id": "2026/722",
+  "title": "(Mis)using the Lattice Isomorphism Problem. Cryptanalysis of the double-LIP and Construction of LIP-Based Blind Signatures",
+  "authors": "Veronika Kuchta, Francesco Sica",
+  "date": "2026-04-20",
+  "direction": "sis-lip-ideal",
+  "tags": [
+   "LIP",
+   "blind signature",
+   "双 LIP"
+  ],
+  "summary": "分析基于 LIP 的盲签名：证明 Abe–Okamoto 框架在 LIP 下不能得到安全实例，并给出对 double-LIP 的攻击——从两个一般 LIP 实例恢复秘密幺模矩阵。最后提出结合 LIP、CVP 与模 SIS 的新盲签名构造。",
+  "ctf_relevance": 3,
+  "ctf_note": "LIP 协议缺陷",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/722"
+ },
+ {
+  "id": "2026/699",
+  "title": "HAWK with Hint: Algebraic Key Recovery from Side-Channel Leakage",
+  "authors": "Byoungchan Chi, Changmin Lee, Inhun Lee",
+  "date": "2026-09-10",
+  "direction": "sis-lip-ideal",
+  "tags": [
+   "HAWK",
+   "侧信道",
+   "LIP"
+  ],
+  "summary": "把 HAWK 签名采样器的物理泄漏形式化为 HAWK with Hint，研究全系数、精确符号与带噪符号泄漏，结合公开签名信息与 HAWK 的 Gram 矩阵结构给出多项式时间恢复算法，说明无需完整恢复采样器输出即可恢复密钥。HAWK-1024：全系数泄漏单条签名即可；参考实现 14 条 trace 提取全部 28672 个符号、约 157 秒恢复；10% 符号错误需 420 条、40% 需 13397 条。",
+  "ctf_relevance": 4,
+  "ctf_note": "HAWK + LIP hint",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/699"
+ },
+ {
+  "id": "2026/2620",
+  "title": "When Elliptic-Curve Semiprimality Certificates Reveal Factors",
+  "authors": "Giuseppe Vitto",
+  "date": "2026-10-26",
+  "direction": "coppersmith-rsa",
+  "tags": [
+   "EC 半素性证书",
+   "分解",
+   "CM"
+  ],
+  "summary": "形式化 Goldwasser–Kilian 型椭圆曲线半素性证书：对 CM 构造的证书，仅凭 (N,S,D) 即可用 norm-lattice 重构在期望多项式时间分解 N（当 Frobenius 落在已知虚二次域或迹为零）。据此分解 Reble 的 1084 位与 Broadhurst 的 5061 位模数。",
+  "ctf_relevance": 3,
+  "ctf_note": "RSA/EC 证书侧信道",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/2620"
+ },
+ {
+  "id": "2026/2109",
+  "title": "Attacking CRT-RSA with Small Exponents via Unravelled Linearization",
+  "authors": "Zhaopeng Ding, Yanshuo Zhang, Zhaopeng Dai, Ziyang Yan, Ying Chen",
+  "date": "2026-10-18",
+  "direction": "coppersmith-rsa",
+  "tags": [
+   "CRT-RSA",
+   "小 dp/dq",
+   "Unravelled Linearization",
+   "MSB 泄漏"
+  ],
+  "summary": "用 unravelled linearization 给出平衡 CRT-RSA 小 dp,dq 的新 Coppersmith 格攻击：实际效果与 Takayasu–Lu–Peng 相当，但格维数约为其一半，理论估计与实验更吻合；并扩展到 p+q 与 dp,dq 的 MSB 泄漏模型（p+q MSB 泄漏为首个此类攻击）。",
+  "ctf_relevance": 5,
+  "ctf_note": "CRT-RSA 小 dp/部分位（核心）",
+  "mapped": "coppersmith_multi.sage",
+  "url": "https://eprint.iacr.org/2026/2109"
+ },
+ {
+  "id": "2026/1969",
+  "title": "Efficient Polynomial System Solving via Dixon Resultants: Applications to AO Primitives",
+  "authors": "Haohai Suo, Jiamin Cui",
+  "date": "2026-09-21",
+  "direction": "coppersmith-rsa",
+  "tags": [
+   "Dixon resultant",
+   "多元多项式",
+   "Gröbner"
+  ],
+  "summary": "重新审视 Dixon resultant 作为同时消去多个变量的工具：用格路径计数给出 Dixon 矩阵规模上界与复杂度估计，并给出开源 C 实现 DRSolve。在低变量/高次数场景优于 Magma/msolve，适合欠定系统的参数消元。",
+  "ctf_relevance": 3,
+  "ctf_note": "多元多项式系统求解",
+  "mapped": "coppersmith_multi.sage",
+  "url": "https://eprint.iacr.org/2026/1969"
+ },
+ {
+  "id": "2026/1908",
+  "title": "A Generalized Wiener-type Attack Against a Family RSA-like Cryptosystems",
+  "authors": "George Teseleanu",
+  "date": "2026-09-10",
+  "direction": "coppersmith-rsa",
+  "tags": [
+   "RSA 变体",
+   "广义 Wiener",
+   "连分数+格"
+  ],
+  "summary": "对 Cotan–Teșeleanu 的 ed-k(p^n-1)(q^n-1)=1（n=2^i, i>2）结合连分数与格方法给出新攻击，延续此前 n=1,2,4 的结果。",
+  "ctf_relevance": 3,
+  "ctf_note": "n=2^i 的广义 Wiener",
+  "mapped": "boneh_durfee.sage",
+  "url": "https://eprint.iacr.org/2026/1908"
+ },
+ {
+  "id": "2026/1529",
+  "title": "Generalized Wiener-Type Attacks on Two RSA-Like Cryptosystems",
+  "authors": "Abdoulaye Faye, Michel Seck, Abdoul Aziz Ciss, Papa Cheikhou Diop, Oumar Niang",
+  "date": "2026-07-26",
+  "direction": "coppersmith-rsa",
+  "tags": [
+   "RSA 变体",
+   "广义 Wiener",
+   "Coppersmith"
+  ],
+  "summary": "把两个 RSA-like 密钥方程（(p^4-1)(q^4-1) 与 (p-1)^2(q-1)^2）的攻击从平衡模数推广到任意素数 p,q 的 N=pq；结合 Coppersmith 与连分数，在 x,y,ω 满足一定条件时分解 N。",
+  "ctf_relevance": 3,
+  "ctf_note": "非平衡模数的广义 Wiener",
+  "mapped": "boneh_durfee.sage",
+  "url": "https://eprint.iacr.org/2026/1529"
+ },
+ {
+  "id": "2026/1357",
+  "title": "A refined cryptanalytic attack against a generalized cubic Pell RSA scheme",
+  "authors": "Brahim Chnioune, Mohammed Rahmani, Abderrahmane Nitaj, Mhammed Ziane",
+  "date": "2026-07-02",
+  "direction": "coppersmith-rsa",
+  "tags": [
+   "RSA 变体",
+   "cubic Pell",
+   "格攻击"
+  ],
+  "summary": "针对 Cotan–Teșeleanu 的广义 cubic Pell RSA（ed-1≡0 mod ψ_n(N)），给出格技术恢复私钥，可超过此前 N^{0.292(n-1)} 的界，条件是 p、q 共享足够多的最低位。",
+  "ctf_relevance": 3,
+  "ctf_note": "RSA 变体超界",
+  "mapped": "coppersmith_multi.sage",
+  "url": "https://eprint.iacr.org/2026/1357"
+ },
+ {
+  "id": "2026/1295",
+  "title": "A new attack to RSA with small private exponent and partial information.",
+  "authors": "Jorge Jimenez Urroz",
+  "date": "2026-06-25",
+  "direction": "coppersmith-rsa",
+  "tags": [
+   "RSA",
+   "小 d",
+   "部分 p+q",
+   "连分数"
+  ],
+  "summary": "给出 Wiener 连分数攻击的简单修改：当已知 p+q 的 δ 比例最高位时，可在 d<n^{(1+δ)/2} 时分解 n，且该算法无条件（不依赖 Coppersmith）。示例可破 512-bit 模数、d<n^{0.3}。",
+  "ctf_relevance": 4,
+  "ctf_note": "Wiener 变体 + 部分信息",
+  "mapped": "boneh_durfee.sage",
+  "url": "https://eprint.iacr.org/2026/1295"
+ },
+ {
+  "id": "2026/1137",
+  "title": "A Review of Lattice Attacks Applied to Two Types of RSA Variants",
+  "authors": "Ramona Corbeanu, George Teseleanu",
+  "date": "2026-06-02",
+  "direction": "coppersmith-rsa",
+  "tags": [
+   "RSA 变体",
+   "综述",
+   "格攻击"
+  ],
+  "summary": "综述 Gaussian 整数模 N=pq 与 cubic Pell 两类 RSA 变体的格攻击：先给出多项式时间求解 xH(y)+cz≡0 mod β（H 为首一多项式）的一般方法并推广已有界，再应用于两类方案在部分密钥信息等场景下的分解。",
+  "ctf_relevance": 3,
+  "ctf_note": "RSA 变体综述",
+  "mapped": "coppersmith_multi.sage",
+  "url": "https://eprint.iacr.org/2026/1137"
+ },
+ {
+  "id": "2026/1027",
+  "title": "Computing Asymptotic Bounds for the Automated Coppersmith Method via Linear Programming",
+  "authors": "Zhaopeng Ding, Zhaopeng Dai, Baofeng Wu, Yanshuo Zhang, Kejun Zhang",
+  "date": "2026-09-18",
+  "direction": "coppersmith-rsa",
+  "tags": [
+   "Automated Coppersmith",
+   "线性规划",
+   "EC-HNP"
+  ],
+  "summary": "把 Meers–Nowakowski 的 Automated Coppersmith 渐近界计算转化为线性规划，得到可证明正确且显式可算的公式；应用于 Commutative Isogeny HNP、MIHNP、EC-HNP、未知乘子 LCG、POKE 的 Leveled Isogeny Problem 等五个场景，改进其界。是判断“题目参数能否用 Coppersmith 打”的核心工具。",
+  "ctf_relevance": 5,
+  "ctf_note": "判断 Coppersmith 参数是否可行",
+  "mapped": "coppersmith_multi.sage / ec_hnp.sage",
+  "url": "https://eprint.iacr.org/2026/1027"
+ },
+ {
+  "id": "2026/519",
+  "title": "A Generalized Partial Exposure Lattice Attack Against an RSA variant Based on Cubic Pell Curves",
+  "authors": "Michel Seck, Hortense Boudjou Tchapgnouo",
+  "date": "2026-03-14",
+  "direction": "coppersmith-rsa",
+  "tags": [
+   "RSA 变体",
+   "cubic Pell",
+   "部分暴露"
+  ],
+  "summary": "针对 Nitaj–Seck 基于 cubic Pell 方程的 RSA 变体（N=p^r q^s），在已知 p 或 q 的部分比特时，对密钥方程 eu0-(p-1)^2(q-1)^2 v0=w0 给出推广的部分暴露格攻击，扩展了 Rahmani–Nitaj 仅 r=s=1 的结果。",
+  "ctf_relevance": 4,
+  "ctf_note": "RSA 变体 + 已知部分 p/q 位",
+  "mapped": "coppersmith_multi.sage",
+  "url": "https://eprint.iacr.org/2026/519"
+ },
+ {
+  "id": "2026/244",
+  "title": "Revisit Unravelled Linearization with Erhart (quasi-)Polynomial",
+  "authors": "Yansong Feng, Yiming Gao, Honggang Hu, Abderrahmane Nitaj, Yanbin Pan, Mengce Zheng",
+  "date": "2026-02-13",
+  "direction": "coppersmith-rsa",
+  "tags": [
+   "Coppersmith",
+   "Unravelled Linearization",
+   "Ehrhart"
+  ],
+  "summary": "用 Ehrhart 理论严格分析 Coppersmith + Unravelled Linearization 的格构造：指出以往用 Lagrange 插值、假设格维数是 m 的多项式并不总成立（可能是拟多项式），并给出 DimOracle 同时估计格维数与行列式。作为应用改进五个结果（LCG、二次生成器、子集和 PRG、POKE 同源的部分密钥攻击等），把 POKE 所需 MSB 泄漏从 85.29% 降到 79.81%（特殊情形 79.08%）。",
+  "ctf_relevance": 4,
+  "ctf_note": "多元 Coppersmith 参数/界",
+  "mapped": "coppersmith_multi.sage",
+  "url": "https://eprint.iacr.org/2026/244"
+ },
+ {
+  "id": "2026/2566",
+  "title": "Fault-Induced Nonce Repetition in Threshold Lattice Signatures: A Reveal-Structure Criterion, Cross-Scheme Analysis, and Detection Boundaries",
+  "authors": "Yulong Meng",
+  "date": "2026-10-20",
+  "direction": "hnp-signatures",
+  "tags": [
+   "阈值签名",
+   "故障",
+   "nonce 重放",
+   "ML-DSA"
+  ],
+  "summary": "证明阈值格签名的物理故障可导致跨会话 nonce 重放：单方 RNG 状态回滚即可泄漏其 share，t-of-n 中只需故障 t 台设备即可恢复完整签名密钥，且每条签名单独看都合法。在 Mithril 上端到端验证（96/96 精确恢复，无需格归约），并给出 reveal-structure 判据与检测边界。",
+  "ctf_relevance": 4,
+  "ctf_note": "阈值 ML-DSA 故障",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/2566"
+ },
+ {
+  "id": "2026/1808",
+  "title": "Cross-Signature Signing-Key Recovery and Domain-Separation Repair for SDitH v2",
+  "authors": "José Luis Delgado",
+  "date": "2026-10-12",
+  "direction": "hnp-signatures",
+  "tags": [
+   "SDitH",
+   "code-based",
+   "PRG 复用"
+  ],
+  "summary": "对 SDitH v2 给出跨签名签名密钥恢复：VOLEitH PRG 以 AES/Rijndael 计数器模式从零开始，导致每条签名/每个 leaf 使用相同输入，一次加密即可测试候选 seed；结合 RSD 约束过滤假候选，找到 seed 即得长期 witness。q=2^12 次选择消息签名比 AES-128/192/256 暴力搜索便宜 11.23–11.67 bit。",
+  "ctf_relevance": 3,
+  "ctf_note": "code-based 签名实现缺陷",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/1808"
+ },
+ {
+  "id": "2026/1366",
+  "title": "Halfspace Learning for Lattice Signature Key Recovery from Signs",
+  "authors": "Marcus Brinkmann, Nicolai Kraus, Alexander May",
+  "date": "2026-07-02",
+  "direction": "hnp-signatures",
+  "tags": [
+   "签名泄漏",
+   "半空间学习",
+   "HAWK/Falcon/ML-DSA"
+  ],
+  "summary": "证明对 HAWK、Falcon、ML-DSA，即使只泄漏随机数某个坐标的 Hamming 重量或单个 bit，也能推断该坐标符号；把密钥恢复建模为 Learning a Halfspace。HAWK 128-bit 下 30 条签名 10 分钟恢复，Falcon 100 条不到 1 分钟（比已有攻击少 250×），ML-DSA 19 万条秒级恢复，且可抗 30%–35% 噪声。",
+  "ctf_relevance": 4,
+  "ctf_note": "签名随机数的符号/Hamming 重量泄漏",
+  "mapped": "hnp_ecdsa.py",
+  "url": "https://eprint.iacr.org/2026/1366"
+ },
+ {
+  "id": "2026/423",
+  "title": "Coppersmith's Method for Solving Modular Inversion Hidden Number Problem via Determinant-Based Elimination",
+  "authors": "Zhaopeng Ding, Zhaopeng Dai, Baofeng Wu, Rundong Wang, Yanshuo Zhang",
+  "date": "2026-03-02",
+  "direction": "hnp-signatures",
+  "tags": [
+   "HNP",
+   "MIHNP",
+   "Coppersmith",
+   "ICG"
+  ],
+  "summary": "提出基于行列式消元的 shift 多项式选取策略，改进多元模方程的 Coppersmith 方法；在 MIHNP 与 Inversive Congruential Generator 预测上理论上和实践上均优于先前方法，并证明 MIDHNP 不比 MIHNP 难，推翻 Boneh 等（Asiacrypt 2001）的猜想。",
+  "ctf_relevance": 5,
+  "ctf_note": "模逆 HNP / ICG 预测",
+  "mapped": "coppersmith_multi.sage / hnp_ecdsa.py",
+  "url": "https://eprint.iacr.org/2026/423"
+ },
+ {
+  "id": "2026/2560",
+  "title": "Graphs and cycles in curve-based collision walks",
+  "authors": "Sebastiano Boscardin, Jolijn Cottaar, Monika Trimoska",
+  "date": "2026-10-22",
+  "direction": "ecc-pairing-isogeny",
+  "tags": [
+   "多用户",
+   "碰撞攻击",
+   "ECDLP",
+   "isogeny"
+  ],
+  "summary": "研究椭圆曲线与同源问题在多用户场景下的碰撞攻击：综述 van Oorschot–Wiener 型攻击，提出更适合无限制同源路径问题的伪随机游走，并分析同时恢复 L 个公钥所需的碰撞数；例如 F_{p^2} 超奇异同源约需 L+log L 次碰撞且无需 infiltrator。",
+  "ctf_relevance": 3,
+  "ctf_note": "多用户 ECDLP/isogeny",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/2560"
+ },
+ {
+  "id": "2026/1823",
+  "title": "HyperSolver: Asymptotically and Concretely Accelerating the Delfs–Galbraith Attack using Isogeny Ladders",
+  "authors": "Lorenz Panny, Ryan Rueger, Alessandro Sferlazza, Aleksei Udovenko",
+  "date": "2026-08-28",
+  "direction": "ecc-pairing-isogeny",
+  "tags": [
+   "Delfs-Galbraith",
+   "isogeny ladder",
+   "SQIsign"
+  ],
+  "summary": "给出 Delfs–Galbraith 算法的无内存新变体，用 isogeny ladder 寻找从任意超奇异曲线到已知自同态环曲线的同源路径，进而解超奇异自同态环问题。任意特征下渐近优于此前最好变体一个对数因子，具体成本也更低；100-bit 实例 <100 GPU 小时，影响 SQIsign 等参数估计。",
+  "ctf_relevance": 3,
+  "ctf_note": "isogeny",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/1823"
+ },
+ {
+  "id": "2026/1776",
+  "title": "Cofactor-torsion attacks on hinted scalar multiplications in SNARK circuits",
+  "authors": "Youssef El Housni",
+  "date": "2026-08-22",
+  "direction": "ecc-pairing-isogeny",
+  "tags": [
+   "SNARK",
+   "ECC",
+   "cofactor",
+   "hinted scalar mult"
+  ],
+  "summary": "指出 Eagen 等（Latincrypt 2025）的 hinted scalar multiplication 系列依赖“素数阶”隐含假设：认证恒等式在完整 E(F_p) 上检查，只有 cofactor 为 1 时才强制 Q 落入素阶子群。在 cofactor 曲线上给出两类伪造（any-scalar 与 chosen-scalar），可让 gadget 接受 Q'=[k]P+T；已在 BLS12-381/BN254/BW6-761 上验证。",
+  "ctf_relevance": 4,
+  "ctf_note": "SNARK 曲线 gadget",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/1776"
+ },
+ {
+  "id": "2026/1623",
+  "title": "Triple Cryptanalysis of Isogeny-Based VRFs from Asiacrypt 2025",
+  "authors": "Yi-Fu Lai, Yu Yu, Xiaogang Zhou",
+  "date": "2026-08-05",
+  "direction": "ecc-pairing-isogeny",
+  "tags": [
+   "isogeny VRF",
+   "radical-CGL",
+   "密钥恢复"
+  ],
+  "summary": "对 Asiacrypt 2025 的 radical-CGL 同源 VRF 给出三阶段攻击：先利用公钥只存 j-invariant 而计算用两系数表示的差异破坏唯一可验证性，再利用这些系数在 1536 次查询、30 分钟内恢复 256-bit 密钥；并对同文的 group-action VRF 给出单查询攻击。",
+  "ctf_relevance": 4,
+  "ctf_note": "isogeny VRF",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/1623"
+ },
+ {
+  "id": "2026/1575",
+  "title": "Solving the supersingular isogeny problem in time $p^{2/5+o(1)}$ using bivariate multipoint evaluation",
+  "authors": "Aleksei Udovenko",
+  "date": "2026-07-31",
+  "direction": "ecc-pairing-isogeny",
+  "tags": [
+   "supersingular isogeny",
+   "双变量多点求值"
+  ],
+  "summary": "给出超奇异同源问题的无条件攻击，时间与内存 p^{2/5+o(1)}，基于 Kedlaya–Umans 等高度理论化的多元多点求值算法；与 Wesolowski 的 p^{1/3+o(1)} 启发式攻击同属“寻找曲线到其 Galois 共轭的可分同源以构造非标量自同态”的路线。作者明确说明该结果只有理论意义，不威胁实际同源密码系统。",
+  "ctf_relevance": 3,
+  "ctf_note": "isogeny",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/1575"
+ },
+ {
+  "id": "2026/1486",
+  "title": "The supersingular isogeny problem in time and memory $p^{1/3+o(1)}$",
+  "authors": "Benjamin Wesolowski",
+  "date": "2026-07-20",
+  "direction": "ecc-pairing-isogeny",
+  "tags": [
+   "supersingular isogeny",
+   "复杂度"
+  ],
+  "summary": "在关于随机整数光滑性的合理启发式假设下，证明超奇异同源问题可在时间与内存 p^{1/3+o(1)} 内求解，改进此前 p^{1/2+o(1)}；但 o(1) 中的超多项式开销与高内存使具体参数影响尚不明确。",
+  "ctf_relevance": 3,
+  "ctf_note": "isogeny 参数评估",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/1486"
+ },
+ {
+  "id": "2026/1002",
+  "title": "On weak keys of POKE",
+  "authors": "Tomoki Moriya",
+  "date": "2026-05-21",
+  "direction": "ecc-pairing-isogeny",
+  "tags": [
+   "POKE",
+   "isogeny PKE",
+   "弱密钥"
+  ],
+  "summary": "研究 POKE（基于同源的 PKE）的安全性：指出其存在弱密钥可降低某些攻击复杂度；POKE-2D 因弱密钥概率极低而不受影响，但 POKE-4D 受威胁，需修改参数（修改后性能优势消失）。",
+  "ctf_relevance": 3,
+  "ctf_note": "isogeny 弱密钥",
+  "mapped": "—",
+  "url": "https://eprint.iacr.org/2026/1002"
+ }
+]

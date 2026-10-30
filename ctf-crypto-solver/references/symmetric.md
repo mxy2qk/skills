@@ -142,13 +142,21 @@ ciphertext under the same nonce.
 
 ```python
 from ctfkit import blockcipher as bc
+# single 16-byte case
 h, j0 = bc.gcm_nonce_reuse_forge(c1, t1, c2, t2)
-tag = bc.gcm_forge_tag(h, j0, b"", new_ct)
+# general (any length, AAD): recover candidate H by factoring the tag-difference
+# polynomial over GF(2^128), then forge
+cands = bc.gcm_nonce_reuse_forge_multi(c1, t1, c2, t2, aad1, aad2)
+tag = bc.gcm_forge_tag(cands[0][0], cands[0][1], aad, new_ct)
 ```
 
-The one-block helper is exact. Multi-block messages require factoring a
-polynomial over `GF(2^128)`; use `nonce-disrespect` or a dedicated GHASH
-solver. The plaintext recovery part (`C1 xor C2`) always works.
+`gcm_nonce_reuse_forge_multi` handles multi-block / unequal-length messages and
+AAD: it builds `T1 xor T2 = GHASH1(H) - GHASH2(H)` as a polynomial in `H`,
+finds all roots in `GF(2^128)` (Cantor–Zassenhaus), and returns `(H, E_K(J0))`
+candidates. If several roots come back, disambiguate with any known
+`(ciphertext, tag)` pair under the same nonce. Template:
+`scripts/templates/gcm_reuse.py` (JSON input). `nonce-disrespect` remains a
+useful external cross-check. The plaintext recovery `C1 xor C2` always works.
 
 ### CBC-MAC forgery
 

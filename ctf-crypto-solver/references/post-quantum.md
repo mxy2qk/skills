@@ -111,7 +111,59 @@ Kyber KAT) to the challenge implementation.
    coefficients.
 5. Only then consider a full BKZ attack; it is usually not the intended path.
 
-## 6. Pitfalls
+Fast start: `python scripts/templates/pqc_triage.py <challenge-dir>` scans the
+files for moduli / ring degrees / scheme names and implementation-bug clues and
+prints the matching references, paper directions and templates.
+
+## 6. Tooling added for PQ (2026)
+
+`ctfkit.pqc`:
+
+```python
+from ctfkit import pqc
+pqc.detect(q=3329)                 # -> ['ML-KEM/Kyber']
+M = pqc.negacyclic_matrix(h, q)    # multiplication-by-h in Z_q[x]/(x^N+1)
+pqc.negacyclic_mul(f, g, q)        # ring product
+s, e = pqc.flatten_lwe(A, b, q)    # tiny-noise PQ instance -> LWE solve
+```
+
+Templates:
+
+| Situation | Template |
+|---|---|
+| tiny noise / sparse or ternary secret → plain LWE | `scripts/templates/lwe_bkz.sage` (BKZ), `ctfkit.pqc.flatten_lwe` (small) |
+| leaked bits of the ML-DSA mask `y`, faults, side-channel traces | `scripts/templates/ilwe_bp.sage` (belief propagation), `scripts/templates/lwe_hints.sage` (hint lattice) |
+| NTRU public key `h = g/f` with small `f,g` | `scripts/templates/ntru.py`, `ctfkit.lattice.ntru_recover` |
+| PQC challenge recognition / weakness scan | `scripts/templates/pqc_triage.py` |
+
+## 7. 2026 attack directions (paper library)
+
+The `pqc-implementation` direction in `assets/papers/` (25 papers) covers the
+current research-grade attacks; use `scripts/papers/search.py --tag ML-DSA`,
+`--tag ML-KEM`, `--tag HAWK`, etc. Highlights:
+
+- **ML-DSA mask leakage** (`y` single bit / noisy bits / Hamming weight):
+  2026/472, 2026/580, 2026/1712, 2026/2091 (ILWE + belief propagation),
+  2026/1904 (horizontal fusion, 4 traces), 2026/056, 2026/2643.
+- **ML-DSA faults / rejection sampling**: 2026/1344 (single-fault challenge
+  sampling), 2026/1448 (randomized Dilithium), 2026/2567 (rejection-sampling
+  fault evaluation).
+- **ML-KEM oracles / implementation**: 2026/070 (DF oracle + LDPC),
+  2026/1682 (incomplete FO comparison → linear key recovery), 2026/2069
+  (comparison Booleanisation fault), 2026/820, 2026/2137, 2026/2448.
+- **NTRU / Falcon**: 2026/582 (FrozenTRU cold boot), 2026/2124 (Falcon
+  floating-point conversion leakage), 2026/2527 (NTRU+ module attacks).
+- **Threshold signatures**: 2026/1386, 2026/1668 (nonce reuse),
+  2026/2566 (fault-induced nonce repetition).
+- **Structure / parameter evaluation**: 2026/279, 2026/366, 2026/1041,
+  2026/2420.
+
+Rule: the vulnerability tells you the **hint type** (perfect/approximate
+coefficient, sign, noisy linear equation); map it to `lwe_hints.sage`
+(construction) or `ilwe_bp.sage` (soft decoding) instead of attacking the
+primitive directly.
+
+## 8. Pitfalls
 
 - **Do not treat Kyber/Dilithium as "just RSA/AES"**: the flag is usually
   encrypted with a derived symmetric key; recover the shared secret first.

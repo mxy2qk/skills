@@ -354,3 +354,155 @@ def gcm_nonce_reuse_forge(
     if h is None:
         return 0, 0
     return h, gcm_j0_mask(h, aad, c1, t1)
+
+
+# --------------------------------------------------------------------------
+# Multi-block forbidden attack (polynomials over GF(2^128))
+# --------------------------------------------------------------------------
+
+def _padd(a, b):
+    n = max(len(a), len(b))
+    out = [0] * n
+    for i in range(n):
+        x = a[i] if i < len(a) else 0
+        y = b[i] if i < len(b) else 0
+        out[i] = x ^ y
+    return _ptrim(out)
+
+
+def _ptrim(p):
+    while len(p) > 1 and p[-1] == 0:
+        p.pop()
+    return p
+
+
+def _pmul(a, b):
+    if not a or not b:
+        return [0]
+    out = [0] * (len(a) + len(b) - 1)
+    for i, ai in enumerate(a):
+        if ai == 0:
+            continue
+        for j, bj in enumerate(b):
+            if bj:
+                out[i + j] ^= gmul(ai, bj)
+    return _ptrim(out)
+
+
+def _pdivmod(a, b):
+    a = list(a)
+    db = len(b) - 1
+    inv = ginv(b[-1])
+    q = [0] * max(1, len(a) - db)
+    while len(a) - 1 >= db and any(a):
+        d = len(a) - 1 - db
+        c = gmul(a[-1], inv)
+        q[d] = c
+        for i in range(len(b)):
+            a[d + i] ^= gmul(c, b[i])
+        a = _ptrim(a)
+        if len(a) == 1 and a[0] == 0:
+            break
+    return _ptrim(q), _ptrim(a)
+
+
+def _pmod(a, b):
+    return _pdivmod(a, b)[1]
+
+
+def _pgcd(a, b):
+    a, b = _ptrim(list(a)), _ptrim(list(b))
+    while len(b) > 1 or (b and b[0] != 0):
+        a, b = b, _pmod(a, b)
+    # normalize monic
+    if a and a[-1] != 0:
+        inv = ginv(a[-1])
+        a = [gmul(c, inv) for c in a]
+    return _ptrim(a)
+
+
+def _ppowmod(base, exp, mod):
+    r = [_GCM_ONE]
+    b = _pmod(base, mod)
+    while exp:
+        if exp & 1:
+            r = _pmod(_pmul(r, b), mod)
+        b = _pmod(_pmul(b, b), mod)
+        exp >>= 1
+    return r
+
+
+# multiplicative identity in the NIST bit-reflected GF(2^128) encoding
+_GCM_ONE = 1 << 127
+
+
+def ghash_poly(aad: bytes, ciphertext: bytes) -> list[int]:
+    """GHASH_H(aad, c) as a polynomial in H (low-degree first, over GF(2^128))."""
+    blocks = _block_int(aad) + _block_int(ciphertext)
+    blocks.append(((len(aad) * 8) << 64) | (len(ciphertext) * 8))
+    N = len(blocks)
+    # ghash = sum_k blocks[k] * H^(N-k), k=0..N-1  -> degree N .. 1
+    coeffs = [0] * (N + 1)
+    for k, blk in enumerate(blocks):
+        coeffs[N - k] ^= blk
+    return _ptrim(coeffs)
+
+
+def _poly_roots(p: list[int]) -> list[int]:
+    """All roots in GF(2^128) of a polynomial p (over GF(2^128))."""
+    p = _ptrim([c & _MASK128 for c in p])
+    if len(p) <= 1:
+        return []
+    # R = gcd(p, x^(2^128) - x) = product of distinct linear factors
+    xpoly = [0, _GCM_ONE]
+    r = _ppowmod(xpoly, 1 << 128, p)     # x^(2^128) mod p
+    R = _pgcd(p, _padd(r, xpoly))
+    roots = []
+    _split_roots(R, roots, 1)
+    return roots
+
+
+def _split_roots(R, out, seed):
+    if len(R) <= 1:
+        return
+    if len(R) == 2:                       # linear: a1*x + a0 -> root a0/a1
+        out.append(gmul(R[0], ginv(R[1])))
+        return
+    # Cantor-Zassenhaus (equal degree 1, q = 2^128)
+    delta = seed
+    while True:
+        cur = _pmod([0, delta & _MASK128], R)       # delta*x mod R
+        T = list(cur)
+        for _ in range(127):
+            cur = _pmod(_pmul(cur, cur), R)
+            T = _padd(T, cur)
+        g = _pgcd(T, R)
+        if 1 < len(g) < len(R):
+            q, _rem = _pdivmod(R, g)
+            _split_roots(g, out, delta + 1)
+            _split_roots(q, out, delta + 2)
+            return
+        delta += 1
+        if delta > 10000:
+            raise RuntimeError("root splitting failed")
+
+
+def gcm_recover_h_multi(
+    c1: bytes, t1: bytes, c2: bytes, t2: bytes,
+    aad1: bytes = b"", aad2: bytes = b"",
+) -> list[int]:
+    """Recover candidate H values from two messages encrypted with the SAME
+    nonce/key (multi-block allowed). Returns the roots of the tag-difference
+    polynomial; the true H is among them (verify with gcm_j0_mask/forge)."""
+    P = _padd(ghash_poly(aad1, c1), ghash_poly(aad2, c2))
+    P[0] ^= int.from_bytes(t1, "big") ^ int.from_bytes(t2, "big")
+    return _poly_roots(P)
+
+
+def gcm_nonce_reuse_forge_multi(
+    c1: bytes, t1: bytes, c2: bytes, t2: bytes,
+    aad1: bytes = b"", aad2: bytes = b"",
+) -> list[tuple[int, int]]:
+    """Return [(H, E_K(J0))] candidates for any-length single-nonce reuse."""
+    return [(h, gcm_j0_mask(h, aad1, c1, t1))
+            for h in gcm_recover_h_multi(c1, t1, c2, t2, aad1, aad2)]

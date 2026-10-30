@@ -117,10 +117,21 @@ pred = prng.java_random_predict(outputs[:2], count=10)  # predicts after out2
 
 ### V8 `Math.random()` (XorShift128+)
 
-V8 uses XorShift128+; `Math.random()` returns a 53-bit float. Given 5–10
-consecutive outputs of `Math.floor(CONST * Math.random())`, recover the two
-64-bit state words with a Z3 `QF_BV` solver. Tools: `v8_rand_buster`,
-`d0nutptr/v8_rand_buster`. Note that V8 caches values LIFO; reverse the order.
+V8 uses XorShift128+ over two 64-bit words; `Math.random()` returns the top 53
+bits of each 64-bit step divided by `2^53`. Given a few consecutive outputs,
+recover the two state words with a Z3 `QF_BV` solver, then predict.
+
+```python
+from ctfkit import prng
+g = prng.XorShift128Plus(state0, state1)   # reference implementation
+g.next64(); g.next_double()
+prng.v8_double_to_int(0.123)                # invert Math.random() to 53 bits
+```
+
+Runnable template: `scripts/templates/v8_xorshift128plus.py` (needs
+`pip install z3-solver`; takes JSON `outputs`, and predicts from the recovered
+state). Note that V8 caches values LIFO in some call sites; reverse the order
+if the sequence looks shuffled. Tools: `d0nutptr/v8_rand_buster`.
 
 ### C `srand`/`rand`
 

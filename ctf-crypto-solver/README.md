@@ -9,16 +9,17 @@ script, and recover/validate the flag.
 ```
 ctf-crypto-solver/
 ├── SKILL.md                 # the operating manual (read this first)
-├── references/              # 18 deep-dive docs (triage, RSA, ECC, lattice, ...)
+├── references/              # 25 deep-dive docs (triage, RSA, ECC, lattice, ...)
+├── assets/papers/           # curated ePrint attack-paper library + search
 └── scripts/
     ├── env.sh               # find Python and optional packages
-    ├── selftest.py          # 75 checks; run once per session
+    ├── selftest.py          # 83 checks; run once per session
     ├── intake.py            # challenge inventory + ranked hypotheses
     ├── flagcheck.py         # flag extraction/ranking/normalization
     ├── templates/           # copy-paste solves (HNP, padding oracle, MT, ...)
     └── ctfkit/              # the attack library
         ├── util, classical, rsa, lattice, prng
-        ├── blockcipher, ecc, hashx, dh, stream, exotic, zkp, pow
+        ├── blockcipher, ecc, hashx, dh, stream, exotic, zkp, pow, pqc
         └── data/            # English word-frequency table for scoring
 ```
 
